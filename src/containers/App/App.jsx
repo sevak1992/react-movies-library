@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import theme from "theme";
+import { PrivateRoute } from "routes/PrivateRoute";
 
 import routes from "routes";
 
@@ -20,7 +21,14 @@ function App() {
           <Switch>
             {routes.map((route) => {
               const Component = route.component;
-              return (
+              return route.private ? (
+                <PrivateRoute
+                  key={route.id}
+                  path={route.path}
+                  exact={!!route.exact}
+                  component={Component}
+                />
+              ) : (
                 <Route
                   key={route.id}
                   path={route.path}
@@ -29,8 +37,8 @@ function App() {
                 />
               );
             })}
-            <Redirect from="*" to="/" />
           </Switch>
+          <Redirect from="*" to="/" />
         </Router>
       </div>
     </ThemeProvider>
