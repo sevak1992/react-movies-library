@@ -1,11 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-const Home = () => {
+import {getPopularMovies} from 'actions/movies';
+
+function Home() {
+    useEffect(() => {
+        getPopularMovies()
+            .catch(err => {
+                console.log('err ', err);
+            });
+    }, []);
+
     return (
         <div>
             Home page
         </div>
     )
-};
+}
 
-export default Home;
+export default Home

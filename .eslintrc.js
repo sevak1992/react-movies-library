@@ -22,11 +22,16 @@ module.exports = {
     },
     "plugins": [
         "react",
+        "react-hooks",
         "jsx-a11y",
         "prettier",
         "jest"
     ],
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "import/no-unresolved": [0],
+        "import/prefer-default-export": [0]
     }
 };
