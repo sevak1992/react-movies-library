@@ -1,13 +1,16 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
-import routes from 'routes';
+import routes from "routes";
 
 function App() {
   return (
-    <div
-        className="page-wrap"
-    >
+    <div className="page-wrap">
       <Router>
         <Switch>
           {routes.map((route) => {
@@ -23,7 +26,7 @@ function App() {
           })}
           <Redirect from="*" to="/" />
         </Switch>
-        </Router>
+      </Router>
     </div>
   );
 }
