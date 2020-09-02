@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import MoviesList from "components/MoviesList";
 import { getPopularMovies } from "apis/tmdb";
 import Header from "containers/Header";
+import MainContent from "components/common/MainContent";
 
 function Home({ configs }) {
   const [movies, setMovies] = useState([]);
@@ -19,9 +20,9 @@ function Home({ configs }) {
   return (
     <>
       <Header />
-      <div className="main-content">
+      <MainContent>
         <MoviesList movies={movies} configs={configs} />
-      </div>
+      </MainContent>
     </>
   );
 }

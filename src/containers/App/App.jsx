@@ -37,7 +37,9 @@ function App() {
                   key={route.id}
                   path={route.path}
                   exact={!!route.exact}
-                  component={Component}
+                  render={(routeProps) => {
+                    return <Component {...routeProps} configs={configs} />;
+                  }}
                 />
               ) : (
                 <Route

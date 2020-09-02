@@ -14,8 +14,23 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   itemImage: {
-    height: 0,
-    paddingTop: "56.25%",
+    height: "24rem",
+  },
+  movieItem: {
+    position: "relative",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      transform: "scale(1.015)",
+    },
+  },
+  actions: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    padding: 0,
+    background: "rgba(0,0,0,0.2)",
+    justifyContent: "flex-end",
   },
 }));
 
@@ -25,28 +40,23 @@ function MovieItem({ movie, baseUrl, posterSizes }) {
   const { vote_average: voteAverage } = movie;
   const rating = voteAverage / 2;
   return (
-    <Card className="movie-item">
+    <Card className={classes.movieItem}>
       <CardMedia
         image={imageUrl}
         title={movie.title}
         className={classes.itemImage}
       />
       <CardContent>
+        <Typography variant="h6" color="textPrimary" component="p" noWrap>
+          {movie.title}
+        </Typography>
         <Typography
           variant="subtitle1"
           color="textPrimary"
           component="p"
           noWrap
         >
-          {movie.title}
-        </Typography>
-        <Typography
-          variant="subtitle2"
-          color="textPrimary"
-          component="p"
-          noWrap
-        >
-          {movie.release_date}
+          Release Date: {movie.release_date}
         </Typography>
         <Rating
           readOnly
@@ -55,7 +65,7 @@ function MovieItem({ movie, baseUrl, posterSizes }) {
           icon={<StarBorderIcon />}
         />
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions className={classes.actions} disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteBorderIcon color="error" />
         </IconButton>

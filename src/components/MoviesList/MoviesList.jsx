@@ -10,7 +10,7 @@ function MoviesList({ configs, movies, xs, sm, md, lg, xl }) {
   }
   const { base_url: baseUrl, poster_sizes: posterSizes } = configs.images;
   return (
-    <Grid container justify="center" spacing={2}>
+    <Grid container justify="center" spacing={3}>
       {movies.map((movie) => (
         <Grid key={movie.id} item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <MovieItem
