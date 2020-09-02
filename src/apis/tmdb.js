@@ -17,7 +17,8 @@ export const getMovie = (id) => {
   console.log(id);
 };
 
-export const getPopularMovies = () => tmdbApi.get("/movie/popular");
+export const getPopularMovies = (page = 1) =>
+  tmdbApi.get("/movie/popular", { params: { page } });
 
 export const getMoviesByTerm = (searchTerm) => {
   console.log(searchTerm);
