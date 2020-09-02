@@ -9,19 +9,15 @@ const tmdbApi = axios.create({
   },
 });
 
-export const getConfigs = () => {
-  return tmdbApi.get("configuration");
-};
+export const getConfigs = () => tmdbApi.get("configuration");
 
-export const getGenres = () => {};
+export const getGenres = () => tmdbApi.get("/genre/movie/list");
 
 export const getMovie = (id) => {
   console.log(id);
 };
 
-export const getPopularMovies = () => {
-  return tmdbApi.get("/movie/popular");
-};
+export const getPopularMovies = () => tmdbApi.get("/movie/popular");
 
 export const getMoviesByTerm = (searchTerm) => {
   console.log(searchTerm);
