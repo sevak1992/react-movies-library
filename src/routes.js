@@ -1,6 +1,7 @@
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 import SignIn from "./containers/SignIn";
+import SignUp from "./containers/SignUp";
 import Favorites from "./containers/Favorites";
 import Details from "./containers/Details";
 
@@ -35,6 +36,13 @@ const routes = [
   },
   {
     id: 5,
+    path: "/sign-up",
+    exact: true,
+    private: false,
+    component: SignUp,
+  },
+  {
+    id: 6,
     path: "/favorites",
     exact: true,
     private: true,

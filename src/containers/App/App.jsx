@@ -38,6 +38,7 @@ function App() {
                   path={route.path}
                   exact={!!route.exact}
                   render={(routeProps) => {
+                    // TODO: change to component and provide configs in the context
                     return <Component {...routeProps} configs={configs} />;
                   }}
                 />

@@ -30,5 +30,8 @@ module.exports = {
     "no-unused-expressions": "off",
     "react/jsx-props-no-spreading": "off",
     "react/forbid-prop-types": "off",
+    "no-named-as-default": "off",
+    "react/display-name": "off",
+    "no-param-reassign": "off",
   },
 };
