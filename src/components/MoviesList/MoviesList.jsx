@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from "react";
-import Grid from "@material-ui/core/Grid";
+import React from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroller";
 
-import { getPopularMovies } from "apis/tmdb";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import MovieItem from "components/MovieItem";
 
-function MoviesList({ configs, xs, sm, md, lg, xl }) {
-  const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getPopularMovies(page);
-      // movies = movies.concat(res.data.results);
-      setMovies([...movies.concat(res.data.results)]);
-    };
-    fetchData();
-  }, [page]);
-
-  const loadMore = React.useCallback(() => {
-    setPage(page + 1);
-  }, []);
-
+function MoviesList({
+  movies,
+  hasMore,
+  loadMore,
+  configs,
+  xs,
+  sm,
+  md,
+  lg,
+  xl,
+}) {
   if (!configs.images) {
     return "";
   }
@@ -34,13 +31,11 @@ function MoviesList({ configs, xs, sm, md, lg, xl }) {
         <InfiniteScroll
           pageStart={0}
           loadMore={loadMore}
-          // TODO: check if there is more movies
-          hasMore
-          // TODO: improve loader text
+          hasMore={hasMore}
           loader={
-            <div className="loader" key={0}>
-              Loading ...
-            </div>
+            <Box key={0} display="flex" justifyContent="center" mt={3}>
+              <CircularProgress />
+            </Box>
           }
         >
           <Grid container justify="center" spacing={3}>
@@ -61,16 +56,17 @@ function MoviesList({ configs, xs, sm, md, lg, xl }) {
 }
 
 MoviesList.propTypes = {
-  // movies: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     id: PropTypes.number,
-  //     original_title: PropTypes.string,
-  //     title: PropTypes.string,
-  //     vote_average: PropTypes.number,
-  //     release_date: PropTypes.string,
-  //   })
-  // ).isRequired,
-  // loadMore: PropTypes.func.isRequired,
+  hasMore: PropTypes.bool,
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      original_title: PropTypes.string,
+      title: PropTypes.string,
+      vote_average: PropTypes.number,
+      release_date: PropTypes.string,
+    })
+  ).isRequired,
+  loadMore: PropTypes.func.isRequired,
   xs: PropTypes.number,
   sm: PropTypes.number,
   md: PropTypes.number,
@@ -90,6 +86,7 @@ MoviesList.defaultProps = {
   md: 4,
   lg: 3,
   xl: 3,
+  hasMore: true,
 };
 
 export default MoviesList;

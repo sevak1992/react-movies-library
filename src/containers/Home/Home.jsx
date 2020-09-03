@@ -1,12 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Box";
 
 import MoviesList from "components/MoviesList";
 import Header from "containers/Header";
 import FilterBar from "components/FilterBar";
+import { getPopularMovies } from "apis/tmdb";
 
 function Home({ configs }) {
+  const [movies, setMovies] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getPopularMovies();
+        if (res.data.total_pages === 1) {
+          setHasMore(false);
+        }
+        setMovies((m) => [...m.concat(res.data.results)]);
+      } catch (error) {
+        // TODO: handle error
+      }
+    };
+    fetchData();
+  }, []);
+
+  const loadMore = async (loadPage) => {
+    try {
+      // we increment step by 1 because API step starts from 1 and not from 0
+      const res = await getPopularMovies(loadPage + 1);
+      if (res.data.total_pages === loadPage + 1) {
+        setHasMore(false);
+      }
+      setMovies((m) => [...m.concat(res.data.results)]);
+    } catch (error) {
+      // TODO: handle error
+    }
+  };
+
   return (
     <>
       <Header />
@@ -15,7 +46,12 @@ function Home({ configs }) {
           <FilterBar />
         </Grid>
         <Grid container item xs={6} spacing={3}>
-          <MoviesList configs={configs} />
+          <MoviesList
+            movies={movies}
+            hasMore={hasMore}
+            loadMore={loadMore}
+            configs={configs}
+          />
         </Grid>
       </Grid>
     </>
