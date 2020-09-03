@@ -22,7 +22,7 @@ const Details = ({ configs, location }) => {
       setLoading(false);
     };
     fetchMovie();
-  }, []);
+  }, [id]);
 
   return loading ? (
     <center>
