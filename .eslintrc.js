@@ -32,6 +32,7 @@ module.exports = {
     "react/forbid-prop-types": "off",
     "no-named-as-default": "off",
     "react/display-name": "off",
+    "react/prop-types": "off",
     "no-param-reassign": "off",
   },
 };

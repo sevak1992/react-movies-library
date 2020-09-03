@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
@@ -11,8 +10,14 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Rating from "@material-ui/lab/Rating";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
+  link: {
+    textDecoration: "none",
+    display: "block",
+    width: "100%",
+  },
   itemImage: {
     height: "24rem",
   },
@@ -40,37 +45,39 @@ function MovieItem({ movie, baseUrl, posterSizes }) {
   const { vote_average: voteAverage } = movie;
   const rating = voteAverage / 2;
   return (
-    <Card className={classes.movieItem}>
-      <CardMedia
-        image={imageUrl}
-        title={movie.title}
-        className={classes.itemImage}
-      />
-      <CardContent>
-        <Typography variant="h6" color="textPrimary" component="p" noWrap>
-          {movie.title}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          color="textPrimary"
-          component="p"
-          noWrap
-        >
-          Release Date: {movie.release_date}
-        </Typography>
-        <Rating
-          readOnly
-          value={rating}
-          precision={0.5}
-          icon={<StarBorderIcon />}
+    <Link className={classes.link} to={`/movie/${movie.id}`}>
+      <Card className={classes.movieItem}>
+        <CardMedia
+          image={imageUrl}
+          title={movie.title}
+          className={classes.itemImage}
         />
-      </CardContent>
-      <CardActions className={classes.actions} disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteBorderIcon color="error" />
-        </IconButton>
-      </CardActions>
-    </Card>
+        <CardContent>
+          <Typography variant="h6" color="textPrimary" component="p" noWrap>
+            {movie.title}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            component="p"
+            noWrap
+          >
+            Release Date: {movie.release_date}
+          </Typography>
+          <Rating
+            readOnly
+            value={rating}
+            precision={0.5}
+            icon={<StarBorderIcon />}
+          />
+        </CardContent>
+        <CardActions className={classes.actions} disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteBorderIcon color="error" />
+          </IconButton>
+        </CardActions>
+      </Card>
+    </Link>
   );
 }
 

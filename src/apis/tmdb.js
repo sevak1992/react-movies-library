@@ -14,11 +14,23 @@ export const getConfigs = () => tmdbApi.get("configuration");
 export const getGenres = () => tmdbApi.get("/genre/movie/list");
 
 export const getMovie = (id) => {
-  console.log(id);
+  return tmdbApi.get(`/movie/${id}`);
 };
 
 export const getPopularMovies = () => tmdbApi.get("/movie/popular");
 
+export const getRecommendedMoviesByMovie = (id) => {
+  return tmdbApi.get(`/movie/${id}/recommendations`);
+};
+
+export const getSimilarMoviesByMovie = (id) => {
+  return tmdbApi.get(`/movie/${id}/similar`);
+};
+
 export const getMoviesByTerm = (searchTerm) => {
   console.log(searchTerm);
+};
+
+export const getMovieCredits = (id) => {
+  return tmdbApi.get(`/movie/${id}/credits`);
 };

@@ -11,7 +11,8 @@ export default {
     },
   },
   typography: {
-    fontFamily: "Lato",
+    fontFamily: `"Roboto", "-apple-system, BlinkMacSystemFont, "Segoe UI", "Lato",
+    "Helvetica Neue", sans-serif"`,
     button: {
       textTransform: "capitalize",
       fontSize: "1.125rem",

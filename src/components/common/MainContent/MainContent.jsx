@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles(() => ({
   mainContent: {
-    paddingTop: "40px",
+    paddingTop: "2.5rem",
+    paddingBottom: "2.5rem",
   },
 }));
 

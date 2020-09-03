@@ -10,12 +10,12 @@ import FilterBar from "components/FilterBar";
 function Home({ configs }) {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMovies = async () => {
       const res = await getPopularMovies();
       setMovies(res.data.results);
     };
 
-    fetchData();
+    fetchMovies();
   }, []);
 
   return (

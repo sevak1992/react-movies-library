@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
-import MovieItem from "components/MovieItem";
+import MovieItem from "components/common/MovieItem";
 
 function MoviesList({ configs, movies, xs, sm, md, lg, xl }) {
   if (!configs.images) {
@@ -27,11 +27,10 @@ function MoviesList({ configs, movies, xs, sm, md, lg, xl }) {
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
-      original_title: PropTypes.string,
-      title: PropTypes.string,
-      vote_average: PropTypes.number,
-      release_date: PropTypes.string,
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      vote_average: PropTypes.number.isRequired,
+      release_date: PropTypes.string.isRequired,
     })
   ).isRequired,
   xs: PropTypes.number,
@@ -41,8 +40,8 @@ MoviesList.propTypes = {
   xl: PropTypes.number,
   configs: PropTypes.shape({
     images: PropTypes.shape({
-      base_url: PropTypes.string,
-      poster_sizes: PropTypes.arrayOf(PropTypes.string),
+      base_url: PropTypes.string.isRequired,
+      poster_sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
     }),
   }).isRequired,
 };
