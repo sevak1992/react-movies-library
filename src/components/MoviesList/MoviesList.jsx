@@ -1,30 +1,62 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
+import InfiniteScroll from "react-infinite-scroller";
+
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import MovieItem from "components/common/MovieItem";
 
-function MoviesList({ configs, movies, xs, sm, md, lg, xl }) {
+function MoviesList({
+  movies,
+  hasMore,
+  loadMore,
+  configs,
+  xs,
+  sm,
+  md,
+  lg,
+  xl,
+}) {
   if (!configs.images) {
     return "";
   }
+
   const { base_url: baseUrl, poster_sizes: posterSizes } = configs.images;
+
   return (
-    <Grid container justify="center" spacing={3}>
-      {movies.map((movie) => (
-        <Grid key={movie.id} item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
-          <MovieItem
-            movie={movie}
-            baseUrl={baseUrl}
-            posterSizes={posterSizes}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      {movies.length > 0 && (
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          loader={
+            <Box key={0} display="flex" justifyContent="center" mt={3}>
+              <CircularProgress />
+            </Box>
+          }
+        >
+          <Grid container justify="center" spacing={3}>
+            {movies.map((movie) => (
+              <Grid key={movie.id} item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
+                <MovieItem
+                  movie={movie}
+                  baseUrl={baseUrl}
+                  posterSizes={posterSizes}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </InfiniteScroll>
+      )}
+    </>
   );
 }
 
 MoviesList.propTypes = {
+  hasMore: PropTypes.bool,
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -33,6 +65,7 @@ MoviesList.propTypes = {
       release_date: PropTypes.string.isRequired,
     })
   ).isRequired,
+  loadMore: PropTypes.func.isRequired,
   xs: PropTypes.number,
   sm: PropTypes.number,
   md: PropTypes.number,
@@ -52,6 +85,7 @@ MoviesList.defaultProps = {
   md: 4,
   lg: 3,
   xl: 3,
+  hasMore: true,
 };
 
 export default MoviesList;
