@@ -57,8 +57,7 @@ function SignUpForm(props) {
         });
       })
       .then(() => history.push("/"))
-      .catch((error) => {
-        console.log("signup error", error);
+      .catch(() => {
         // TODO
       });
   };
