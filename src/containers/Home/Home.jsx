@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Box";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import MoviesList from "components/MoviesList";
 import Header from "containers/Header";
@@ -11,8 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   homeContent: {
     maxWidth: "100rem",
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: "7rem auto 2.5rem",
   },
 }));
 
@@ -48,6 +48,7 @@ function Home({ configs }) {
   };
 
   const classes = useStyles();
+  const matches960 = useMediaQuery("(min-width: 960px)");
 
   return (
     <>
@@ -60,9 +61,11 @@ function Home({ configs }) {
         display="flex"
         className={classes.homeContent}
       >
-        <Grid item pr={3} spacing={3}>
-          <FilterBar />
-        </Grid>
+        {matches960 && (
+          <Grid item pr={3} spacing={3}>
+            <FilterBar />
+          </Grid>
+        )}
         <Grid item xs={6} spacing={3}>
           <MoviesList
             movies={movies}
