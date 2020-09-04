@@ -1,30 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAsync } from "react-use";
+import { useSelector, useDispatch } from "react-redux";
+
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 
+import { addGenresFilter, addYearFilter } from "actions";
 import { getGenres } from "apis/tmdb";
+import { config } from "../../constants";
 import GenreFilter from "./GenreFilter";
 import YearsSlider from "./YearsSlider";
 
-// TODO: move into constants (e.g. constants/config)
-const YEARS_NUM = 20;
-
-const YEARS = [new Date().getFullYear()];
-for (let i = 0; i < YEARS_NUM; i += 1) {
-  YEARS.unshift(YEARS[0] - 1);
-}
-const FIRST_YEAR = YEARS[0];
-const LAST_YEAR = YEARS[YEARS.length - 1];
+const LAST_YEAR = new Date().getFullYear();
+const FIRST_YEAR = LAST_YEAR - config.YEARS_NUM;
 
 function FilterBar() {
+  const dispatch = useDispatch();
   const { value: genres, loading } = useAsync(
     async () => (await getGenres())?.data?.genres || []
   );
 
-  // TODO: store filters in global store
-  const [checkedGenresList, setCheckedGenresList] = useState([]);
-  const [yearsRange, setYearsRange] = useState([FIRST_YEAR, LAST_YEAR]);
+  const filter = useSelector((state) => state.filter);
+
+  const setYearsRange = (range) => dispatch(addYearFilter(range));
+  const setCheckedGenresList = (genreList) =>
+    dispatch(addGenresFilter(genreList));
 
   return (
     <Box>
@@ -32,12 +32,12 @@ function FilterBar() {
         {!loading && (
           <GenreFilter
             genres={genres}
-            checkedGenres={checkedGenresList}
+            checkedGenres={filter.genres}
             onChange={setCheckedGenresList}
           />
         )}
         <YearsSlider
-          yearsRange={yearsRange}
+          yearsRange={filter.yearsRange ?? [FIRST_YEAR, LAST_YEAR]}
           updateRange={setYearsRange}
           firstYear={FIRST_YEAR}
           lastYear={LAST_YEAR}
