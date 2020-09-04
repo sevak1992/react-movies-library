@@ -68,6 +68,17 @@ PrevArrow.defaultProps = {
   onClick: () => {},
 };
 
+const getSettings = (sliderSettings, itemsCount) => {
+  sliderSettings.slidesToShow = Math.min(
+    sliderSettings.slidesToShow,
+    itemsCount
+  );
+  sliderSettings.responsive.forEach(({ settings }) => {
+    settings.slidesToShow = Math.min(settings.slidesToShow, itemsCount);
+  });
+  return sliderSettings;
+};
+
 function Slider({
   items,
   loading,
@@ -83,7 +94,10 @@ function Slider({
   const getContent = () => {
     if (items.length) {
       return (
-        <ReactSlider {...settings} className={classes.sliderContainer}>
+        <ReactSlider
+          {...getSettings(settings, items.length)}
+          className={classes.sliderContainer}
+        >
           {items.map((item) => {
             return <SliderItemWrapper key={item.key}>{item}</SliderItemWrapper>;
           })}
@@ -128,35 +142,31 @@ Slider.defaultProps = {
     infinite: true,
     speed: 500,
     slidesToShow: 12,
-    slidesToScroll: 12,
+    slidesToScroll: 1,
     lazyLoad: null,
     responsive: [
       {
         breakpoint: 1280,
         settings: {
           slidesToShow: 8,
-          slidesToScroll: 8,
         },
       },
       {
         breakpoint: 960,
         settings: {
           slidesToShow: 12,
-          slidesToScroll: 12,
         },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 8,
-          slidesToScroll: 8,
         },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 4,
-          slidesToScroll: 4,
         },
       },
     ],
