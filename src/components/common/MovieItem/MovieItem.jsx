@@ -12,7 +12,7 @@ import Rating from "@material-ui/lab/Rating";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
     display: "block",
@@ -39,6 +39,9 @@ const useStyles = makeStyles(() => ({
     padding: 0,
     background: "rgba(0,0,0,0.2)",
     justifyContent: "flex-end",
+  },
+  favoritesIcon: {
+    color: theme.palette.error.dark,
   },
 }));
 
@@ -76,7 +79,7 @@ function MovieItem({ movie, baseUrl, posterSizes }) {
         </CardContent>
         <CardActions className={classes.actions} disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteBorderIcon color="error" />
+            <FavoriteBorderIcon className={classes.favoritesIcon} />
           </IconButton>
         </CardActions>
       </Card>
