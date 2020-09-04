@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAsync } from "react-use";
 import { useSelector, useDispatch } from "react-redux";
 
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 import { addGenresFilter, addYearFilter } from "actions";
 import { getGenres } from "apis/tmdb";
@@ -22,9 +23,20 @@ function FilterBar() {
 
   const filter = useSelector((state) => state.filter);
 
-  const setYearsRange = (range) => dispatch(addYearFilter(range));
-  const setCheckedGenresList = (genreList) =>
-    dispatch(addGenresFilter(genreList));
+  const [checkedGenres, setCheckedGenres] = useState(filter.genres ?? []);
+  const [yearsRange, setYearsRange] = useState(
+    filter.yearsRange ?? [FIRST_YEAR, LAST_YEAR]
+  );
+
+  useEffect(() => {
+    setCheckedGenres(filter.genres);
+    setYearsRange(filter.yearsRange);
+  }, [filter]);
+
+  const onFilter = () => {
+    dispatch(addYearFilter(yearsRange));
+    dispatch(addGenresFilter(checkedGenres));
+  };
 
   return (
     <Box>
@@ -32,16 +44,22 @@ function FilterBar() {
         {!loading && (
           <GenreFilter
             genres={genres}
-            checkedGenres={filter.genres}
-            onChange={setCheckedGenresList}
+            checkedGenres={checkedGenres}
+            onChange={setCheckedGenres}
           />
         )}
         <YearsSlider
-          yearsRange={filter.yearsRange ?? [FIRST_YEAR, LAST_YEAR]}
+          yearsRange={yearsRange ?? [FIRST_YEAR, LAST_YEAR]}
           updateRange={setYearsRange}
           firstYear={FIRST_YEAR}
           lastYear={LAST_YEAR}
         />
+
+        <Box pb={2} display="flex" justifyContent="center">
+          <Button variant="outlined" color="primary" onClick={onFilter}>
+            Filter
+          </Button>
+        </Box>
       </Paper>
     </Box>
   );
