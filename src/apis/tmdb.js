@@ -15,8 +15,35 @@ export const getGenres = () => tmdbApi.get("/genre/movie/list");
 
 export const getMovie = (id) => tmdbApi.get(`/movie/${id}`);
 
-export const getPopularMovies = (page = 1) =>
-  tmdbApi.get("/movie/popular", { params: { page } });
+export const getMovies = (page = 1, filter = {}) => {
+  const params = { page };
+  if (filter.genres?.length) {
+    params.with_genres = filter.genres.join();
+  }
+  if (filter.yearsRange?.length && filter.yearsRange.length === 2) {
+    // the first second of the the year
+    params["primary_release_date.gte"] = new Date(
+      filter.yearsRange[0],
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    );
+    // the last second of the the year
+    params["primary_release_date.lte"] = new Date(
+      filter.yearsRange[1],
+      11,
+      31,
+      23,
+      59,
+      59,
+      999
+    );
+  }
+  return tmdbApi.get("/discover/movie", { params });
+};
 
 export const getRecommendedMoviesByMovie = (id) =>
   tmdbApi.get(`/movie/${id}/recommendations`);
