@@ -15,6 +15,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { useDispatch } from "react-redux";
+
+import { search } from "actions";
 import MobileDrawer from "./MobileDrawer";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   searchIcon: {
     padding: theme.spacing(0, 2),
     position: "absolute",
-    pointerEvents: "none",
+    // pointerEvents: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -104,6 +107,8 @@ export default function Header() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const dispatch = useDispatch();
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -151,6 +156,8 @@ export default function Header() {
 
   const matches960 = useMediaQuery("(min-width: 960px)");
 
+  const onSearch = () => dispatch(search(searchQuery));
+
   return (
     <div className={classes.grow}>
       <AppBar className={classes.header}>
@@ -188,16 +195,17 @@ export default function Header() {
           )}
           <div className={classes.actionsWrapper}>
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
+              <IconButton aria-label="search" onClick={onSearch}>
+                <SearchIcon className={classes.searchIcon} />
+              </IconButton>
               <InputBase
-                placeholder="primary"
+                placeholder="Search..."
                 color="secondary"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.searchInput,
                 }}
+                onInput={(e) => setSearchQuery(e.target.value)}
               />
             </div>
             <div className={classes.sectionDesktop}>

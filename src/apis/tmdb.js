@@ -15,7 +15,13 @@ export const getGenres = () => tmdbApi.get("/genre/movie/list");
 
 export const getMovie = (id) => tmdbApi.get(`/movie/${id}`);
 
-export const getMovies = (page = 1, filter = {}) => {
+export const searchMovies = (page = 1, query = "") => {
+  const params = { query, page };
+  return tmdbApi.get("/search/movie", { params });
+};
+
+export const getMovies = (page = 1, filter = {}, search) => {
+  if (search) return searchMovies(page, search);
   const params = { page };
   if (filter.genres?.length) {
     params.with_genres = filter.genres.join();
@@ -44,7 +50,6 @@ export const getMovies = (page = 1, filter = {}) => {
   }
   return tmdbApi.get("/discover/movie", { params });
 };
-
 export const getRecommendedMoviesByMovie = (id) =>
   tmdbApi.get(`/movie/${id}/recommendations`);
 
