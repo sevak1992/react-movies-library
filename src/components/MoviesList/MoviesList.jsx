@@ -5,8 +5,16 @@ import InfiniteScroll from "react-infinite-scroller";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { makeStyles } from "@material-ui/core/styles";
 
 import MovieItem from "components/common/MovieItem";
+
+const useStyles = makeStyles(() => ({
+  listingContainer: {
+    paddingLeft: "0.5rem",
+    paddingRight: "0.5rem",
+  },
+}));
 
 function MoviesList({
   movies,
@@ -19,6 +27,8 @@ function MoviesList({
   lg,
   xl,
 }) {
+  const classes = useStyles();
+
   if (!configs.images) {
     return "";
   }
@@ -38,7 +48,12 @@ function MoviesList({
             </Box>
           }
         >
-          <Grid container justify="center" spacing={3}>
+          <Grid
+            container
+            justify="center"
+            spacing={3}
+            className={classes.listingContainer}
+          >
             {movies.map((movie) => (
               <Grid key={movie.id} item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
                 <MovieItem
@@ -81,7 +96,7 @@ MoviesList.propTypes = {
 
 MoviesList.defaultProps = {
   xs: 12,
-  sm: 6,
+  sm: 4,
   md: 4,
   lg: 3,
   xl: 3,
