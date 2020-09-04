@@ -6,7 +6,7 @@ import Heading from "components/common/Heading";
 import MoviesSlider from "components/common/MoviesSlider";
 import { getRecommendedMoviesByMovie } from "apis/tmdb";
 
-function RecommendedMoviesSlider({ movieId, configs }) {
+function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -21,7 +21,12 @@ function RecommendedMoviesSlider({ movieId, configs }) {
   return (
     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <Heading text="Recommended Movies" />
-      <MoviesSlider movies={movies} configs={configs} loading={loading} />
+      <MoviesSlider
+        movies={movies}
+        configs={configs}
+        loading={loading}
+        noItemsMessage={noItemsMessage}
+      />
     </Grid>
   );
 }
@@ -34,6 +39,11 @@ RecommendedMoviesSlider.propTypes = {
     }),
   }).isRequired,
   movieId: PropTypes.number.isRequired,
+  noItemsMessage: PropTypes.string,
+};
+
+RecommendedMoviesSlider.defaultProps = {
+  noItemsMessage: "There is no recommended movies.",
 };
 
 export default RecommendedMoviesSlider;

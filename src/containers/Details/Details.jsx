@@ -34,21 +34,29 @@ const Details = ({ configs, location }) => {
       <Header />
       <MainContent>
         <>
-          <Grid container justify="center" spacing={8}>
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+          <Grid container justify="center" spacing={6}>
+            <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
               <MovieBigImage
                 title={movie.title}
                 src={movie.poster_path}
                 configs={configs}
               />
             </Grid>
-            <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
+            <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
               <MovieContent movie={movie} configs={configs} />
             </Grid>
           </Grid>
           <Grid container justify="flex-start" spacing={4}>
-            <RecommendedMoviesSlider movieId={movie.id} configs={configs} />
-            <SimilarMoviesSlider movieId={movie.id} configs={configs} />
+            <RecommendedMoviesSlider
+              movieId={movie.id}
+              configs={configs}
+              noItemsMessage="There is no recommended movies."
+            />
+            <SimilarMoviesSlider
+              movieId={movie.id}
+              configs={configs}
+              noItemsMessage="There is no similar movies."
+            />
           </Grid>
         </>
       </MainContent>

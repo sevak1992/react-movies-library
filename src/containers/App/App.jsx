@@ -5,12 +5,23 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import {
+  createMuiTheme,
+  ThemeProvider,
+  makeStyles,
+} from "@material-ui/core/styles";
 
 import theme from "theme";
 import { PrivateRoute } from "routes/PrivateRoute";
 import routes from "routes";
 import { getConfigs } from "apis/tmdb";
+
+const useStyles = makeStyles(() => ({
+  pageWrap: {
+    minWidth: "320px",
+    overflow: "hidden",
+  },
+}));
 
 function App() {
   const [configs, setConfigs] = useState({});
@@ -24,10 +35,11 @@ function App() {
   }, []);
 
   const muiTheme = createMuiTheme(theme);
+  const classes = useStyles();
 
   return (
     <ThemeProvider theme={muiTheme}>
-      <div className="page-wrap">
+      <div className={classes.pageWrap}>
         <Router>
           <Switch>
             {routes.map((route) => {

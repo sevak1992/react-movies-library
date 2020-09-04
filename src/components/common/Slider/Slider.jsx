@@ -4,6 +4,7 @@ import ReactSlider from "react-slick";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import { makeStyles } from "@material-ui/core/styles";
+import { Eclipse } from "react-loading-io";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -67,18 +68,32 @@ PrevArrow.defaultProps = {
   onClick: () => {},
 };
 
-function Slider({ items, settings, nextArrow, prevArrow }) {
+function Slider({
+  items,
+  loading,
+  noItemsMessage,
+  settings,
+  nextArrow,
+  prevArrow,
+}) {
   const classes = useStyles();
   settings.nextArrow = nextArrow;
   settings.prevArrow = prevArrow;
-  const sliderItems = items.map((item) => {
-    return <SliderItemWrapper key={item.key}>{item}</SliderItemWrapper>;
-  });
-  return (
-    <ReactSlider {...settings} className={classes.sliderContainer}>
-      {sliderItems}
-    </ReactSlider>
-  );
+
+  const getContent = () => {
+    if (items.length) {
+      return (
+        <ReactSlider {...settings} className={classes.sliderContainer}>
+          {items.map((item) => {
+            return <SliderItemWrapper key={item.key}>{item}</SliderItemWrapper>;
+          })}
+        </ReactSlider>
+      );
+    }
+    return <span>{noItemsMessage}</span>;
+  };
+
+  return loading ? <Eclipse size={64} /> : getContent();
 }
 
 Slider.propTypes = {
@@ -100,11 +115,15 @@ Slider.propTypes = {
       })
     ),
   }),
+  loading: PropTypes.bool,
+  noItemsMessage: PropTypes.string,
   nextArrow: PropTypes.node,
   prevArrow: PropTypes.node,
 };
 
 Slider.defaultProps = {
+  loading: false,
+  noItemsMessage: "There is no elements to show.",
   settings: {
     infinite: true,
     speed: 500,
@@ -115,22 +134,22 @@ Slider.defaultProps = {
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 10,
-          slidesToScroll: 10,
-        },
-      },
-      {
-        breakpoint: 960,
-        settings: {
           slidesToShow: 8,
           slidesToScroll: 8,
         },
       },
       {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 12,
+          slidesToScroll: 12,
+        },
+      },
+      {
         breakpoint: 600,
         settings: {
-          slidesToShow: 6,
-          slidesToScroll: 6,
+          slidesToShow: 8,
+          slidesToScroll: 8,
         },
       },
       {

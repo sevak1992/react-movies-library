@@ -6,6 +6,15 @@ import MoviesList from "components/MoviesList";
 import Header from "containers/Header";
 import FilterBar from "components/FilterBar";
 import { getPopularMovies } from "apis/tmdb";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  homeContent: {
+    maxWidth: "100rem",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+}));
 
 function Home({ configs }) {
   const [movies, setMovies] = useState([]);
@@ -38,14 +47,23 @@ function Home({ configs }) {
     }
   };
 
+  const classes = useStyles();
+
   return (
     <>
       <Header />
-      <Grid container m={6} ml={2} flexDirection="row" display="flex">
-        <Grid container item pr={3} xs spacing={3}>
+      <Grid
+        container
+        m={6}
+        ml={2}
+        flexDirection="row"
+        display="flex"
+        className={classes.homeContent}
+      >
+        <Grid item pr={3} spacing={3}>
           <FilterBar />
         </Grid>
-        <Grid container item xs={6} spacing={3}>
+        <Grid item xs={6} spacing={3}>
           <MoviesList
             movies={movies}
             hasMore={hasMore}

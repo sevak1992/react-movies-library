@@ -3,14 +3,20 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   tagline: {
     textTransform: "uppercase",
     fontWeight: "bold",
     marginBottom: "0.625rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+    },
   },
   title: {
     marginBottom: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2.2rem",
+    },
   },
 }));
 

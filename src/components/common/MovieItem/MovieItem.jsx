@@ -23,6 +23,9 @@ const useStyles = makeStyles(() => ({
   },
   movieItem: {
     position: "relative",
+    maxWidth: "17.5rem",
+    marginLeft: "auto",
+    marginRight: "auto",
     transition: "all 0.3s ease",
     "&:hover": {
       transform: "scale(1.015)",

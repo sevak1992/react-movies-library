@@ -43,7 +43,7 @@ const settings = {
   ],
 };
 
-function MoviesSlider({ movies, loading, configs }) {
+function MoviesSlider({ movies, loading, noItemsMessage, configs }) {
   const { base_url: baseUrl, poster_sizes: posterSizes } = configs.images;
   const movieItems = movies.map((movie) => (
     <MovieItem
@@ -53,8 +53,14 @@ function MoviesSlider({ movies, loading, configs }) {
       posterSizes={posterSizes}
     />
   ));
-  console.log(loading);
-  return <Slider items={movieItems} settings={settings} />;
+  return (
+    <Slider
+      items={movieItems}
+      settings={settings}
+      loading={loading}
+      noItemsMessage={noItemsMessage}
+    />
+  );
 }
 
 MoviesSlider.propTypes = {
@@ -67,12 +73,17 @@ MoviesSlider.propTypes = {
     })
   ).isRequired,
   loading: PropTypes.bool.isRequired,
+  noItemsMessage: PropTypes.string,
   configs: PropTypes.shape({
     images: PropTypes.shape({
       base_url: PropTypes.string.isRequired,
       poster_sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
     }),
   }).isRequired,
+};
+
+MoviesSlider.defaultProps = {
+  noItemsMessage: "There is no movies to show",
 };
 
 export default MoviesSlider;
