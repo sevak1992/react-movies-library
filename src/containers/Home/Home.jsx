@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Box";
+import { useSelector } from "react-redux";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import MoviesList from "components/MoviesList";
 import Header from "containers/Header";
 import FilterBar from "components/FilterBar";
-import { getPopularMovies } from "apis/tmdb";
+import { getMovies } from "apis/tmdb";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
@@ -19,25 +20,27 @@ const useStyles = makeStyles(() => ({
 function Home({ configs }) {
   const [movies, setMovies] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const filter = useSelector((state) => state.filter);
+  const { query } = useSelector((state) => state.search);
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await getPopularMovies();
+        const res = await getMovies(1, filter, query);
         if (res.data.total_pages === 1) {
           setHasMore(false);
         }
-        setMovies((m) => [...m.concat(res.data.results)]);
+        setMovies([...res.data.results]);
       } catch (error) {
         // TODO: handle error
       }
     };
     fetchMovies();
-  }, []);
+  }, [filter, query]);
 
   const loadMore = async (loadPage) => {
     try {
       // we increment step by 1 because API step starts from 1 and not from 0
-      const res = await getPopularMovies(loadPage + 1);
+      const res = await getMovies(loadPage + 1, filter, query);
       if (res.data.total_pages === loadPage + 1) {
         setHasMore(false);
       }
