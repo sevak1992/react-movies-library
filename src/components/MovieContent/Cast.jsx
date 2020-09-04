@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useAsync } from "react-use";
 import PropTypes from "prop-types";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Avatar from "@material-ui/core/Avatar";
@@ -8,15 +9,8 @@ import Slider from "components/common/Slider";
 import { getMovieCredits } from "apis/tmdb";
 
 function Cast({ movieId, baseUrl, posterSizes }) {
-  const [cast, setCast] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchMovie = async () => {
-      const res = await getMovieCredits(movieId);
-      setCast(res.data.cast);
-      setLoading(false);
-    };
-    fetchMovie();
+  const { value: cast, loading } = useAsync(async () => {
+    return (await getMovieCredits(movieId))?.data?.cast || [];
   }, [movieId]);
 
   const imageBaseUrl = `${baseUrl}${posterSizes[0]}`;

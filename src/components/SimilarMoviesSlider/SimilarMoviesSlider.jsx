@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useAsync } from "react-use";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 
@@ -7,22 +8,15 @@ import MoviesSlider from "components/common/MoviesSlider";
 import { getSimilarMoviesByMovie } from "apis/tmdb";
 
 function SimilarMoviesSlider({ movieId, configs, noItemsMessage }) {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchMovies = async () => {
-      const res = await getSimilarMoviesByMovie(movieId);
-      setMovies(res.data.results);
-      setLoading(false);
-    };
-    fetchMovies();
+  const { value: movies, loading } = useAsync(async () => {
+    return (await getSimilarMoviesByMovie(movieId))?.data?.results || [];
   }, [movieId]);
 
   return (
     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <Heading text="Similar Movies" />
       <MoviesSlider
-        movies={movies}
+        movies={movies ?? []}
         configs={configs}
         loading={loading}
         noItemsMessage={noItemsMessage}

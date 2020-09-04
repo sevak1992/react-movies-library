@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useAsync } from "react-use";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import { Eclipse } from "react-loading-io";
@@ -13,15 +14,9 @@ import SimilarMoviesSlider from "components/SimilarMoviesSlider";
 
 const Details = ({ configs, location }) => {
   const id = location.pathname.split("/")[2];
-  const [movie, setMovie] = useState(null);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchMovie = async () => {
-      const res = await getMovie(id);
-      setMovie(res.data);
-      setLoading(false);
-    };
-    fetchMovie();
+
+  const { value: movie, loading } = useAsync(async () => {
+    return (await getMovie(id))?.data || null;
   }, [id]);
 
   return loading ? (
