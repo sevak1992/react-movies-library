@@ -22,10 +22,12 @@ function Home({ configs }) {
   const [hasMore, setHasMore] = useState(true);
   const filter = useSelector((state) => state.filter);
   const { query } = useSelector((state) => state.search);
+  const { sorting } = useSelector((state) => state.sorting);
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await getMovies(1, filter, query);
+        const res = await getMovies(1, filter, query, sorting);
         if (res.data.total_pages === 1) {
           setHasMore(false);
         }
@@ -35,12 +37,12 @@ function Home({ configs }) {
       }
     };
     fetchMovies();
-  }, [filter, query]);
+  }, [filter, query, sorting]);
 
   const loadMore = async (loadPage) => {
     try {
       // we increment step by 1 because API step starts from 1 and not from 0
-      const res = await getMovies(loadPage + 1, filter, query);
+      const res = await getMovies(loadPage + 1, filter, query, sorting);
       if (res.data.total_pages === loadPage + 1) {
         setHasMore(false);
       }

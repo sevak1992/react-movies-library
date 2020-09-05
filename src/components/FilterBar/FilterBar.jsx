@@ -6,11 +6,12 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
-import { addGenresFilter, addYearFilter } from "actions";
+import { addGenresFilter, addYearFilter, changeSorting } from "actions";
 import { getGenres } from "apis/tmdb";
 import { config } from "../../constants";
 import GenreFilter from "./GenreFilter";
 import YearsSlider from "./YearsSlider";
+import Sorting from "./Sorting";
 
 const LAST_YEAR = new Date().getFullYear();
 const FIRST_YEAR = LAST_YEAR - config.YEARS_NUM;
@@ -22,8 +23,10 @@ function FilterBar() {
   );
 
   const filter = useSelector((state) => state.filter);
+  const { sorting } = useSelector((state) => state.sorting);
 
   const [checkedGenres, setCheckedGenres] = useState(filter.genres ?? []);
+  const [selectedSorting, setSelectedSorting] = useState(sorting);
   const [yearsRange, setYearsRange] = useState(
     filter.yearsRange ?? [FIRST_YEAR, LAST_YEAR]
   );
@@ -33,14 +36,23 @@ function FilterBar() {
     setYearsRange(filter.yearsRange);
   }, [filter]);
 
+  useEffect(() => {
+    setSelectedSorting(sorting);
+  }, [sorting]);
+
   const onFilter = () => {
     dispatch(addYearFilter(yearsRange));
     dispatch(addGenresFilter(checkedGenres));
   };
 
+  const onChangeSorting = (event) => {
+    dispatch(changeSorting(event.target.value));
+  };
+
   return (
     <Box>
       <Paper elevation={3}>
+        <Sorting selectedSorting={selectedSorting} onChange={onChangeSorting} />
         {!loading && (
           <GenreFilter
             genres={genres}

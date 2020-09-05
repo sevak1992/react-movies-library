@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Link } from "react-router-dom";
@@ -57,14 +57,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 0,
     width: "100%",
   },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
+  searchBtn: {
     position: "absolute",
-    // pointerEvents: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     color: theme.palette.primary.light,
+    padding: "0 0.625rem",
   },
   inputRoot: {
     color: "inherit",
@@ -105,9 +104,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -195,8 +194,8 @@ export default function Header() {
           )}
           <div className={classes.actionsWrapper}>
             <div className={classes.search}>
-              <IconButton aria-label="search" onClick={onSearch}>
-                <SearchIcon className={classes.searchIcon} />
+              <IconButton className={classes.searchBtn} onClick={onSearch}>
+                <SearchIcon />
               </IconButton>
               <InputBase
                 placeholder="Search..."

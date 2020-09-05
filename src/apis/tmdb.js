@@ -16,13 +16,13 @@ export const getGenres = () => tmdbApi.get("/genre/movie/list");
 export const getMovie = (id) => tmdbApi.get(`/movie/${id}`);
 
 export const searchMovies = (page = 1, query = "") => {
-  const params = { query, page };
+  const params = { query, page, include_adult: false };
   return tmdbApi.get("/search/movie", { params });
 };
 
-export const getMovies = (page = 1, filter = {}, search) => {
+export const getMovies = (page = 1, filter = {}, search, sorting) => {
   if (search) return searchMovies(page, search);
-  const params = { page };
+  const params = { page, include_adult: false };
   if (filter.genres?.length) {
     params.with_genres = filter.genres.join();
   }
@@ -48,6 +48,8 @@ export const getMovies = (page = 1, filter = {}, search) => {
       999
     );
   }
+  params.sort_by = sorting;
+
   return tmdbApi.get("/discover/movie", { params });
 };
 export const getRecommendedMoviesByMovie = (id) =>
@@ -55,9 +57,5 @@ export const getRecommendedMoviesByMovie = (id) =>
 
 export const getSimilarMoviesByMovie = (id) =>
   tmdbApi.get(`/movie/${id}/similar`);
-
-export const getMoviesByTerm = (searchTerm) => {
-  console.log(searchTerm);
-};
 
 export const getMovieCredits = (id) => tmdbApi.get(`/movie/${id}/credits`);

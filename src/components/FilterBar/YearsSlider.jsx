@@ -35,7 +35,7 @@ function YearsSlider({ yearsRange, updateRange, firstYear, lastYear }) {
   );
 
   return (
-    <Box mx={4} p={2}>
+    <Box mx={2} p={2}>
       <FormControl className={classes.formControl}>
         <FormLabel component="legend">Year</FormLabel>
         <Slider
