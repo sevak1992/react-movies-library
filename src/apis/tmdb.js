@@ -20,8 +20,7 @@ export const searchMovies = (page = 1, query = "") => {
   return tmdbApi.get("/search/movie", { params });
 };
 
-export const getMovies = (page = 1, filter = {}, search, sorting) => {
-  if (search) return searchMovies(page, search);
+export const getMovies = (page = 1, filter = {}, sorting) => {
   const params = { page, include_adult: false };
   if (filter.genres?.length) {
     params.with_genres = filter.genres.join();

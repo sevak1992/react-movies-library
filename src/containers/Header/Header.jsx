@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,9 +15,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { useDispatch } from "react-redux";
 
-import { search } from "actions";
 import MobileDrawer from "./MobileDrawer";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,11 +57,13 @@ const useStyles = makeStyles((theme) => ({
   },
   searchBtn: {
     position: "absolute",
+    zIndex: 1,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     color: theme.palette.primary.light,
     padding: "0 0.625rem",
+    borderRadius: 0,
   },
   inputRoot: {
     color: "inherit",
@@ -107,9 +107,26 @@ export default function Header() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const dispatch = useDispatch();
+  const history = useHistory();
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const matches960 = useMediaQuery("(min-width: 960px)");
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (searchQuery.length === 0) {
+      return;
+    }
+    history.push(`/search/${searchQuery}`);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      onSearch(e);
+    }
+  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -152,10 +169,6 @@ export default function Header() {
       </MenuItem>
     </Menu>
   );
-
-  const matches960 = useMediaQuery("(min-width: 960px)");
-
-  const onSearch = () => dispatch(search(searchQuery));
 
   return (
     <div className={classes.grow}>
@@ -205,6 +218,7 @@ export default function Header() {
                   input: classes.searchInput,
                 }}
                 onInput={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={onKeyDown}
               />
             </div>
             <div className={classes.sectionDesktop}>

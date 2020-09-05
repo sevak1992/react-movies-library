@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Box";
 import { useSelector } from "react-redux";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles } from "@material-ui/core/styles";
 
 import MoviesList from "components/MoviesList";
 import Header from "containers/Header";
-import FilterBar from "components/FilterBar";
+import FilterAndSortingBar from "components/FilterAndSortingBar";
 import { getMovies } from "apis/tmdb";
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   homeContent: {
@@ -21,13 +21,12 @@ function Home({ configs }) {
   const [movies, setMovies] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const filter = useSelector((state) => state.filter);
-  const { query } = useSelector((state) => state.search);
   const { sorting } = useSelector((state) => state.sorting);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await getMovies(1, filter, query, sorting);
+        const res = await getMovies(1, filter, sorting);
         if (res.data.total_pages === 1) {
           setHasMore(false);
         }
@@ -37,12 +36,11 @@ function Home({ configs }) {
       }
     };
     fetchMovies();
-  }, [filter, query, sorting]);
+  }, [filter, sorting]);
 
   const loadMore = async (loadPage) => {
     try {
-      // we increment step by 1 because API step starts from 1 and not from 0
-      const res = await getMovies(loadPage + 1, filter, query, sorting);
+      const res = await getMovies(loadPage + 1, filter, sorting);
       if (res.data.total_pages === loadPage + 1) {
         setHasMore(false);
       }
@@ -68,7 +66,7 @@ function Home({ configs }) {
       >
         {matches960 && (
           <Grid item pr={3} spacing={3}>
-            <FilterBar />
+            <FilterAndSortingBar />
           </Grid>
         )}
         <Grid item xs={6} spacing={3}>

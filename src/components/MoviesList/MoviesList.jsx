@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 
 import MovieItem from "components/common/MovieItem";
+import Heading from "components/common/Heading";
 
 const useStyles = makeStyles(() => ({
   listingContainer: {
@@ -26,9 +27,9 @@ function MoviesList({
   md,
   lg,
   xl,
+  title,
 }) {
   const classes = useStyles();
-
   if (!configs.images) {
     return "";
   }
@@ -54,6 +55,11 @@ function MoviesList({
             spacing={3}
             className={classes.listingContainer}
           >
+            {title && (
+              <Grid container>
+                <Heading text={title} />
+              </Grid>
+            )}
             {movies.map((movie) => (
               <Grid key={movie.id} item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
                 <MovieItem
@@ -86,6 +92,7 @@ MoviesList.propTypes = {
   md: PropTypes.number,
   lg: PropTypes.number,
   xl: PropTypes.number,
+  title: PropTypes.string,
   configs: PropTypes.shape({
     images: PropTypes.shape({
       base_url: PropTypes.string.isRequired,
@@ -101,6 +108,7 @@ MoviesList.defaultProps = {
   lg: 3,
   xl: 3,
   hasMore: true,
+  title: "",
 };
 
 export default MoviesList;

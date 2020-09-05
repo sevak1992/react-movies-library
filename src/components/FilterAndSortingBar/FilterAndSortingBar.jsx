@@ -16,7 +16,7 @@ import Sorting from "./Sorting";
 const LAST_YEAR = new Date().getFullYear();
 const FIRST_YEAR = LAST_YEAR - config.YEARS_NUM;
 
-function FilterBar() {
+function FilterAndSortingBar() {
   const dispatch = useDispatch();
   const { value: genres, loading } = useAsync(
     async () => (await getGenres())?.data?.genres || []
@@ -72,4 +72,4 @@ function FilterBar() {
   );
 }
 
-export default FilterBar;
+export default FilterAndSortingBar;

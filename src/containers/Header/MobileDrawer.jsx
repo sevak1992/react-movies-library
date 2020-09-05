@@ -8,7 +8,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Typography from "@material-ui/core/Typography";
 
-import FilterBar from "components/FilterBar";
+import FilterAndSortingBar from "components/FilterAndSortingBar";
 
 const useStyles = makeStyles((theme) => ({
   hide: {
@@ -57,7 +57,7 @@ function MobileDrawer({ open, onClose }) {
         </IconButton>
       </div>
       <Divider />
-      <FilterBar />
+      <FilterAndSortingBar />
     </Drawer>
   );
 }
