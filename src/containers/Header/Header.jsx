@@ -18,6 +18,8 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 
 import MobileDrawer from "./MobileDrawer";
 
+import { messages } from "../../constants";
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -159,13 +161,13 @@ export default function Header() {
             <FavoriteBorderIcon className={classes.favoritesIcon} />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>{messages.HEADER.FAVORITES}</p>
       </MenuItem>
       <MenuItem>
         <IconButton color="primary">
           <ExitToAppIcon />
         </IconButton>
-        <p>Sign Out</p>
+        <p>{messages.HEADER.SIGN_OUT}</p>
       </MenuItem>
     </Menu>
   );
@@ -181,7 +183,7 @@ export default function Header() {
               color="secondary"
               align="center"
             >
-              Movies Library
+              {messages.APP.TITLE}
             </Typography>
           </Link>
         )}
@@ -201,7 +203,7 @@ export default function Header() {
                 variant="h6"
                 color="secondary"
               >
-                Movies Library
+                {messages.APP.TITLE}
               </Typography>
             </Link>
           )}
@@ -211,7 +213,7 @@ export default function Header() {
                 <SearchIcon />
               </IconButton>
               <InputBase
-                placeholder="Search..."
+                placeholder={messages.HEADER.SEARCH_PLACEHOLDER}
                 color="secondary"
                 classes={{
                   root: classes.inputRoot,

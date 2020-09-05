@@ -1,5 +1,5 @@
 export default {
-  YEARS_NUM: 20,
+  YEARS_NUM: 50,
   SORTINGS: [
     {
       label: "Popularity Descending",

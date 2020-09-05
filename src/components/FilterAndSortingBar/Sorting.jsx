@@ -8,7 +8,7 @@ import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import Box from "@material-ui/core/Box";
 
-import { config } from "../../constants";
+import { config, messages } from "../../constants";
 
 const useStyles = makeStyles(() => ({
   formControl: {
@@ -26,7 +26,9 @@ function Sorting({ selectedSorting, onChange }) {
   return (
     <Box mx={2} p={2}>
       <FormControl className={classes.formControl}>
-        <FormLabel component="legend">Sort By</FormLabel>
+        <FormLabel component="legend">
+          {messages.FILTERS_AND_SORTING.SORT_BY}
+        </FormLabel>
         <Select value={sorting} onChange={onChange} input={<Input />}>
           {config.SORTINGS.map(({ label, value }) => (
             <MenuItem key={value} value={value}>

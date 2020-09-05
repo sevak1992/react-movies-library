@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 
 import FilterAndSortingBar from "components/FilterAndSortingBar";
 
+import { messages } from "../../constants";
+
 const useStyles = makeStyles((theme) => ({
   hide: {
     display: "none",
@@ -46,7 +48,7 @@ function MobileDrawer({ open, onClose }) {
     >
       <div className={classes.drawerHeader}>
         <Typography variant="subtitle1" component="p">
-          Filters
+          {messages.MOBILE_DRAWER.FILTERS_AND_SORTING}
         </Typography>
         <IconButton onClick={onClose}>
           {theme.direction === "ltr" ? (

@@ -7,6 +7,8 @@ import LanguageIcon from "@material-ui/icons/Language";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import EventIcon from "@material-ui/icons/Event";
 
+import { messages } from "../../constants";
+
 const useStyles = makeStyles(() => ({
   basicInfoWrapper: {
     marginTop: "2rem",
@@ -33,7 +35,10 @@ function BasicInfo({ releaseDate, originaLanguage, runtime, budget }) {
           color="textPrimary"
           component="p"
         >
-          <span className={classes.iconWrapper} title="Release date">
+          <span
+            className={classes.iconWrapper}
+            title={messages.MOVIE.RELEASE_DATE}
+          >
             <EventIcon />
           </span>
           {releaseDate}
@@ -46,10 +51,10 @@ function BasicInfo({ releaseDate, originaLanguage, runtime, budget }) {
           color="textPrimary"
           component="p"
         >
-          <span className={classes.iconWrapper} title="Duration">
+          <span className={classes.iconWrapper} title={messages.MOVIE.DURATION}>
             <AccessTimeIcon />
           </span>
-          {runtime} Min.
+          {runtime} {messages.MOVIE.MIN}
         </Typography>
       )}
       {!!budget && (
@@ -59,7 +64,7 @@ function BasicInfo({ releaseDate, originaLanguage, runtime, budget }) {
           color="textPrimary"
           component="p"
         >
-          <span className={classes.iconWrapper} title="Budget">
+          <span className={classes.iconWrapper} title={messages.MOVIE.BUDGET}>
             <AttachMoneyIcon />
           </span>
           {budget}
@@ -72,7 +77,10 @@ function BasicInfo({ releaseDate, originaLanguage, runtime, budget }) {
           color="textPrimary"
           component="p"
         >
-          <span className={classes.iconWrapper} title="Original language">
+          <span
+            className={classes.iconWrapper}
+            title={messages.MOVIE.ORIGINAL_LANGUAGE}
+          >
             <LanguageIcon />
           </span>
           {originaLanguage.toUpperCase()}

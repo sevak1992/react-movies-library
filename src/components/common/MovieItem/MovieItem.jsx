@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 
 import NoImageSvg from "assets/noImage.svg";
 
+import { messages } from "../../../constants";
+
 const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
@@ -73,7 +75,7 @@ function MovieItem({ movie, baseUrl, posterSizes }) {
             component="p"
             noWrap
           >
-            Release Date: {movie.release_date}
+            {messages.MOVIE.RELEASE_DATE}: {movie.release_date}
           </Typography>
           <Rating
             readOnly

@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 
 import Heading from "components/common/Heading";
 
+import { messages } from "../../constants";
+
 const useStyles = makeStyles(() => ({
   description: {
     lineHeight: 1.6,
@@ -16,7 +18,7 @@ function Overview({ overview }) {
   const classes = useStyles();
   return (
     <>
-      <Heading text="Overview" />
+      <Heading text={messages.MOVIE.OVERVIEW} />
       <Typography
         className={classes.description}
         variant="subtitle1"

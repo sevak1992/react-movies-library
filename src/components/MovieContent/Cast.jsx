@@ -8,6 +8,8 @@ import Heading from "components/common/Heading";
 import Slider from "components/common/Slider";
 import { getMovieCredits } from "apis/tmdb";
 
+import { messages } from "../../constants";
+
 function Cast({ movieId, baseUrl, posterSizes }) {
   const { value: cast, loading } = useAsync(async () => {
     return (await getMovieCredits(movieId))?.data?.cast || [];
@@ -30,7 +32,7 @@ function Cast({ movieId, baseUrl, posterSizes }) {
 
   return (
     <>
-      <Heading text="Cast" />
+      <Heading text={messages.MOVIE.CAST} />
       <Slider items={castItems} />
     </>
   );

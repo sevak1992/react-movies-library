@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Slider from "@material-ui/core/Slider";
+
+import { messages } from "../../constants";
 
 const useStyles = makeStyles(() => ({
   formControl: {
@@ -37,7 +38,9 @@ function YearsSlider({ yearsRange, updateRange, firstYear, lastYear }) {
   return (
     <Box mx={2} p={2}>
       <FormControl className={classes.formControl}>
-        <FormLabel component="legend">Year</FormLabel>
+        <FormLabel component="legend">
+          {messages.FILTERS_AND_SORTING.YEAR}
+        </FormLabel>
         <Slider
           value={yearsRange}
           onChange={handleChange}

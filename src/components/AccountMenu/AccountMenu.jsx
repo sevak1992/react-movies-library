@@ -6,6 +6,8 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 
+import { messages } from "../../constants";
+
 function AccountMenu({ isLogin }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -46,11 +48,13 @@ function AccountMenu({ isLogin }) {
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Sign Out</MenuItem>
+            <MenuItem onClick={handleClose}>
+              {messages.APP.SIGN_OUT_BTN}
+            </MenuItem>
           </Menu>
         </div>
       ) : (
-        <Button color="inherit">Login</Button>
+        <Button color="inherit">{messages.APP.LOGIN_BTN}</Button>
       )}
     </>
   );

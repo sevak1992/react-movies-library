@@ -7,6 +7,8 @@ import Heading from "components/common/Heading";
 import MoviesSlider from "components/common/MoviesSlider";
 import { getRecommendedMoviesByMovie } from "apis/tmdb";
 
+import { messages } from "../../constants";
+
 function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
   const { value: movies, loading } = useAsync(async () => {
     return (await getRecommendedMoviesByMovie(movieId))?.data?.results || [];
@@ -14,7 +16,7 @@ function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
 
   return (
     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-      <Heading text="Recommended Movies" />
+      <Heading text={messages.MOVIE.RECOMMENDED_MOVIES} />
       <MoviesSlider
         movies={movies ?? []}
         configs={configs}
@@ -37,7 +39,7 @@ RecommendedMoviesSlider.propTypes = {
 };
 
 RecommendedMoviesSlider.defaultProps = {
-  noItemsMessage: "There is no recommended movies.",
+  noItemsMessage: messages.DETAILS.NO_RECOMMENDED_MOVIES,
 };
 
 export default RecommendedMoviesSlider;

@@ -16,6 +16,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import { withFirebase } from "auth/firebase";
 
+import { messages } from "../../constants";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -60,7 +62,7 @@ function LoginForm(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Log in
+          {messages.LOGIN.LOGIN_TITLE}
         </Typography>
         <TextField
           variant="outlined"
@@ -68,7 +70,7 @@ function LoginForm(props) {
           required
           fullWidth
           id="email"
-          label="Email"
+          label={messages.LOGIN.EMAIL}
           name="email"
           autoComplete="email"
           autoFocus
@@ -81,7 +83,7 @@ function LoginForm(props) {
           required
           fullWidth
           name="password"
-          label="Password"
+          label={messages.LOGIN.PASSWORD}
           type="password"
           id="password"
           autoComplete="current-password"
@@ -95,12 +97,12 @@ function LoginForm(props) {
           color="primary"
           className={classes.submit}
         >
-          Log In
+          {messages.LOGIN.LOGIN_BTN}
         </Button>
         <Grid container>
           <Grid item>
             <Link href="sign-up" variant="body2">
-              Do not have an account? Sign Up
+              {messages.LOGIN.DO_NOT_HAVE_ACCOUNT}
             </Link>
           </Grid>
         </Grid>

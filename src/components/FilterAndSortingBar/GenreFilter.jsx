@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import Chip from "@material-ui/core/Chip";
+
+import { messages } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,9 @@ function GenreFilter({ genres, checkedGenres, onChange }) {
   return (
     <Box mx={2} p={2}>
       <FormGroup row>
-        <FormLabel component="legend">Genre</FormLabel>
+        <FormLabel component="legend">
+          {messages.FILTERS_AND_SORTING.GENRE}
+        </FormLabel>
         <div className={classes.root}>
           {genres.map(({ name, id }) => (
             <Chip

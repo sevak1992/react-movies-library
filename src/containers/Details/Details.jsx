@@ -12,6 +12,8 @@ import MovieContent from "components/MovieContent";
 import RecommendedMoviesSlider from "components/RecommendedMoviesSlider";
 import SimilarMoviesSlider from "components/SimilarMoviesSlider";
 
+import { messages } from "../../constants";
+
 const Details = ({ configs, location }) => {
   const id = location.pathname.split("/")[2];
 
@@ -45,12 +47,12 @@ const Details = ({ configs, location }) => {
             <RecommendedMoviesSlider
               movieId={movie.id}
               configs={configs}
-              noItemsMessage="There is no recommended movies."
+              noItemsMessage={messages.DETAILS.NO_RECOMMENDED_MOVIES}
             />
             <SimilarMoviesSlider
               movieId={movie.id}
               configs={configs}
-              noItemsMessage="There is no similar movies."
+              noItemsMessage={messages.DETAILS.NO_SIMILAR_MOVIES}
             />
           </Grid>
         </>

@@ -7,6 +7,8 @@ import MoviesList from "components/MoviesList";
 import MainContent from "components/common/MainContent";
 import Heading from "components/common/Heading";
 
+import { messages } from "../../constants";
+
 const Search = ({ configs, location }) => {
   const query = location.pathname.split("/")[2];
 
@@ -51,12 +53,12 @@ const Search = ({ configs, location }) => {
             hasMore={hasMore}
             loadMore={loadMore}
             configs={configs}
-            title={`Search By "${query}"`}
+            title={`${messages.SEARCH.SEARCH_BY} "${query}"`}
             md={4}
             sm={6}
           />
         ) : (
-          <Heading text={`No movies found By "${query}"`} />
+          <Heading text={`${messages.SEARCH.NO_MOVIES_FOUND_BY} "${query}"`} />
         )}
       </MainContent>
     </>

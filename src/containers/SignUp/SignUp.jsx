@@ -14,7 +14,10 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
+
 import { withFirebase } from "auth/firebase";
+
+import { messages } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -70,7 +73,7 @@ function SignUpForm(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          {messages.SIGN_UP.TITLE}
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -81,7 +84,7 @@ function SignUpForm(props) {
               required
               fullWidth
               id="firstName"
-              label="First Name"
+              label={messages.SIGN_UP.FIRST_NAME}
               autoFocus
               value={firstName}
               onInput={(e) => setFirstName(e.target.value)}
@@ -93,7 +96,7 @@ function SignUpForm(props) {
               required
               fullWidth
               id="lastName"
-              label="Last Name"
+              label={messages.SIGN_UP.LAST_NAME}
               name="lastName"
               autoComplete="lname"
               value={lastName}
@@ -106,7 +109,7 @@ function SignUpForm(props) {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={messages.SIGN_UP.EMAIL}
               name="email"
               autoComplete="email"
               value={email}
@@ -119,7 +122,7 @@ function SignUpForm(props) {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={messages.SIGN_UP.PASSWORD}
               type="password"
               id="password"
               autoComplete="current-password"
@@ -135,12 +138,12 @@ function SignUpForm(props) {
           color="primary"
           className={classes.submit}
         >
-          Sign Up
+          {messages.SIGN_UP.SIGN_UP_BTN}
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
             <Link href="log-in" variant="body2">
-              Already have an account? Log in
+              {messages.SIGN_UP.ALREADY_HAVE_AN_ACCOUNT}
             </Link>
           </Grid>
         </Grid>

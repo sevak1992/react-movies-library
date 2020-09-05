@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import Slider from "components/common/Slider";
 import MovieItem from "components/common/MovieItem";
 
+import { messages } from "../../../constants";
+
 const settings = {
   infinite: true,
   speed: 500,
@@ -83,7 +85,7 @@ MoviesSlider.propTypes = {
 };
 
 MoviesSlider.defaultProps = {
-  noItemsMessage: "There is no movies to show",
+  noItemsMessage: messages.MOVIE.NO_MOVIES_TO_SHOW,
 };
 
 export default MoviesSlider;

@@ -12,6 +12,8 @@ import "slick-carousel/slick/slick-theme.css";
 import ArrowBtn from "./ArrowBtn";
 import SliderItemWrapper from "./SliderItemWrapper";
 
+import { messages } from "../../../constants";
+
 const useStyles = makeStyles(() => ({
   sliderContainer: {
     paddingLeft: "2rem",
@@ -137,7 +139,7 @@ Slider.propTypes = {
 
 Slider.defaultProps = {
   loading: false,
-  noItemsMessage: "There is no elements to show.",
+  noItemsMessage: messages.SLIDER.NO_ELEMENTS_TO_SHOW,
   settings: {
     infinite: true,
     speed: 500,

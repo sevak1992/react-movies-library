@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Heading from "components/common/Heading";
 
+import { messages } from "../../constants";
+
 const useStyles = makeStyles(() => ({
   genreItem: {
     marginRight: "0.5rem",
@@ -16,7 +18,7 @@ function Genres({ genres }) {
   const classes = useStyles();
   return (
     <>
-      <Heading text="Genres" />
+      <Heading text={messages.MOVIE.GENRES} />
       {genres.map((genre) => {
         return (
           <Chip
