@@ -26,7 +26,6 @@ function FilterBar() {
   const { sorting } = useSelector((state) => state.sorting);
 
   const [checkedGenres, setCheckedGenres] = useState(filter.genres ?? []);
-  const [selectedSorting, setSelectedSorting] = useState(sorting);
   const [yearsRange, setYearsRange] = useState(
     filter.yearsRange ?? [FIRST_YEAR, LAST_YEAR]
   );
@@ -35,10 +34,6 @@ function FilterBar() {
     setCheckedGenres(filter.genres);
     setYearsRange(filter.yearsRange);
   }, [filter]);
-
-  useEffect(() => {
-    setSelectedSorting(sorting);
-  }, [sorting]);
 
   const onFilter = () => {
     dispatch(addYearFilter(yearsRange));
@@ -52,7 +47,7 @@ function FilterBar() {
   return (
     <Box>
       <Paper elevation={3}>
-        <Sorting selectedSorting={selectedSorting} onChange={onChangeSorting} />
+        <Sorting selectedSorting={sorting} onChange={onChangeSorting} />
         {!loading && (
           <GenreFilter
             genres={genres}
