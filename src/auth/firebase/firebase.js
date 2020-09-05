@@ -3,13 +3,22 @@ import "firebase/auth";
 import "firebase/database";
 import "firebase/storage";
 
+const {
+  REACT_APP_FIREBASE_API_KEY: FIREBASE_API_KEY,
+  REACT_APP_FIREBASE_AUTH_DOMAIN: FIREBASE_AUTH_DOMAIN,
+  REACT_APP_FIREBASE_DATABASE_URL: FIREBASE_DATABASE_URL,
+  REACT_APP_FIREBASE_MEASUREMENT_ID: FIREBASE_MEASUREMENT_ID,
+  REACT_APP_FIREBASE_PROJECT_ID: FIREBASE_PROJECT_ID,
+  REACT_APP_FIREBASE_APP_ID: FIREBASE_APP_ID,
+} = process.env;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCMSZgmSbjpXMRthBHxEYOnXy07UofHRfI",
-  authDomain: "tmtb-b8251.firebaseapp.com",
-  databaseURL: "https://tmtb-b8251.firebaseio.com",
-  measurementId: "G-S71TJRLWGQ",
-  projectId: "tmtb-b8251",
-  appId: "1:657364492166:web:eabc247df61f2feb3d1607",
+  apiKey: FIREBASE_API_KEY,
+  authDomain: FIREBASE_AUTH_DOMAIN,
+  databaseURL: FIREBASE_DATABASE_URL,
+  measurementId: FIREBASE_MEASUREMENT_ID,
+  projectId: FIREBASE_PROJECT_ID,
+  appId: FIREBASE_APP_ID,
 };
 
 app.initializeApp(firebaseConfig);
