@@ -4,14 +4,18 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import Chip from "@material-ui/core/Chip";
 
-const useStyles = makeStyles(() => ({
-  formControlLabel: {
-    height: 30,
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    maxWidth: 210,
+    "& > *": {
+      margin: theme.spacing(0.5),
+    },
   },
 }));
 
@@ -30,25 +34,22 @@ function GenreFilter({ genres, checkedGenres, onChange }) {
 
   return (
     <Box mx={2} p={2}>
-      <FormControl component="fieldset">
+      <FormGroup row>
         <FormLabel component="legend">Genre</FormLabel>
-        <FormGroup>
+        <div className={classes.root}>
           {genres.map(({ name, id }) => (
-            <FormControlLabel
-              className={classes.formControlLabel}
+            <Chip
               key={id}
-              control={
-                <Checkbox
-                  checked={isChecked(id)}
-                  onChange={check(id)}
-                  name={name}
-                />
-              }
               label={name}
+              clickable
+              color={isChecked(id) ? "primary" : "secondary"}
+              onClick={check(id)}
+              variant="outlined"
+              size="small"
             />
           ))}
-        </FormGroup>
-      </FormControl>
+        </div>
+      </FormGroup>
     </Box>
   );
 }
