@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
+import NoImageSvg from "assets/noImage.svg";
+
 const useStyles = makeStyles((theme) => ({
   imageWrapper: {
     display: "flex",
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 function MovieBigImage({ title, src, configs }) {
   const classes = useStyles();
   const { base_url: baseUrl, poster_sizes: posterSizes } = configs.images;
-  const imageUrl = `${baseUrl}${posterSizes[4]}${src}`;
+  const imageUrl = src ? `${baseUrl}${posterSizes[4]}${src}` : NoImageSvg;
   return (
     <div className={classes.imageWrapper}>
       <img src={imageUrl} title={title} alt={title} className={classes.image} />

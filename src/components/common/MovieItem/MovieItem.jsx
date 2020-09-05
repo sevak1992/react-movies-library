@@ -12,6 +12,8 @@ import Rating from "@material-ui/lab/Rating";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
+import NoImageSvg from "assets/noImage.svg";
+
 const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
@@ -47,7 +49,10 @@ const useStyles = makeStyles((theme) => ({
 
 function MovieItem({ movie, baseUrl, posterSizes }) {
   const classes = useStyles();
-  const imageUrl = `${baseUrl}${posterSizes[3]}${movie.poster_path}`;
+  const { poster_path: posterPath } = movie;
+  const imageUrl = posterPath
+    ? `${baseUrl}${posterSizes[3]}${posterPath}`
+    : NoImageSvg;
   const { vote_average: voteAverage } = movie;
   const rating = voteAverage / 2;
   return (
