@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Rating from "@material-ui/lab/Rating";
@@ -29,12 +29,17 @@ function MovieContent({ movie, configs }) {
   return (
     <>
       <Header title={title} tagline={tagline} />
-      <Rating
-        readOnly
-        value={rating}
-        precision={0.5}
-        icon={<StarBorderIcon />}
-      />
+      {useMemo(
+        () => (
+          <Rating
+            readOnly
+            value={rating}
+            precision={0.5}
+            icon={<StarBorderIcon />}
+          />
+        ),
+        [rating]
+      )}
       {(releaseDate || runtime || budget || originaLanguage) && (
         <BasicInfo
           releaseDate={releaseDate}

@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 import LoadingIndicator from "components/common/LoadingIndicator";
 import HomeContent from "components/HomeContent";
-import Header from "containers/Header";
 import { getMovies } from "apis/tmdb";
 
 function Home({ configs }) {
@@ -44,21 +43,16 @@ function Home({ configs }) {
     }
   };
 
-  return (
-    <>
-      <Header />
-      {loading ? (
-        <LoadingIndicator isFullScrean />
-      ) : (
-        <HomeContent
-          configs={configs}
-          loadMore={loadMore}
-          movies={movies}
-          error={error}
-          hasMore={hasMore}
-        />
-      )}
-    </>
+  return loading ? (
+    <LoadingIndicator isFullScrean />
+  ) : (
+    <HomeContent
+      configs={configs}
+      loadMore={loadMore}
+      movies={movies}
+      error={error}
+      hasMore={hasMore}
+    />
   );
 }
 

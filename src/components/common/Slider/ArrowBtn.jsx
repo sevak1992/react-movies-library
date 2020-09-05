@@ -41,4 +41,4 @@ ArrowBtn.defaultProps = {
   onClick: () => {},
 };
 
-export default ArrowBtn;
+export default React.memo(ArrowBtn);

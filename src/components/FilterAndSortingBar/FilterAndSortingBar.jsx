@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useAsync } from "react-use";
 import { useSelector, useDispatch } from "react-redux";
 import Alert from "@material-ui/lab/Alert";
@@ -42,18 +42,21 @@ function FilterAndSortingBar() {
     setYearsRange(filter.yearsRange);
   }, [filter]);
 
-  const onFilter = () => {
+  const onFilter = useCallback(() => {
     dispatch(addYearFilter(yearsRange));
     dispatch(addGenresFilter(checkedGenres));
-  };
+  }, [yearsRange, checkedGenres, dispatch]);
 
-  const onResetFilter = () => {
+  const onResetFilter = useCallback(() => {
     dispatch(resetFilter());
-  };
+  }, [dispatch]);
 
-  const onChangeSorting = (event) => {
-    dispatch(changeSorting(event.target.value));
-  };
+  const onChangeSorting = useCallback(
+    (event) => {
+      dispatch(changeSorting(event.target.value));
+    },
+    [dispatch]
+  );
 
   return (
     <Box>
@@ -79,17 +82,31 @@ function FilterAndSortingBar() {
           lastYear={LAST_YEAR}
         />
 
-        <Box pb={2} display="flex" justifyContent="center">
-          <Button variant="outlined" color="primary" onClick={onFilter}>
-            {messages.FILTERS_AND_SORTING.FILTER_BTN}
-          </Button>
-        </Box>
+        {useMemo(
+          () => (
+            <Box pb={2} display="flex" justifyContent="center">
+              <Button variant="outlined" color="primary" onClick={onFilter}>
+                {messages.FILTERS_AND_SORTING.FILTER_BTN}
+              </Button>
+            </Box>
+          ),
+          [onFilter]
+        )}
 
-        <Box pb={2} display="flex" justifyContent="center">
-          <Button variant="outlined" color="secondary" onClick={onResetFilter}>
-            {messages.FILTERS_AND_SORTING.RESET_FILTER_BTN}
-          </Button>
-        </Box>
+        {useMemo(
+          () => (
+            <Box pb={2} display="flex" justifyContent="center">
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={onResetFilter}
+              >
+                {messages.FILTERS_AND_SORTING.RESET_FILTER_BTN}
+              </Button>
+            </Box>
+          ),
+          [onResetFilter]
+        )}
       </Paper>
     </Box>
   );

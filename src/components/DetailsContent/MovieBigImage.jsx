@@ -44,4 +44,4 @@ MovieBigImage.propTypes = {
   }).isRequired,
 };
 
-export default MovieBigImage;
+export default React.memo(MovieBigImage);

@@ -37,4 +37,4 @@ LoadingIndicator.defaultProps = {
   isFullScrean: false,
 };
 
-export default LoadingIndicator;
+export default React.memo(LoadingIndicator);

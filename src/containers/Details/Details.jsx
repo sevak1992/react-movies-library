@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import { getMovie } from "apis/tmdb";
 import LoadingIndicator from "components/common/LoadingIndicator";
-import Header from "containers/Header";
 import DetailsContent from "components/DetailsContent";
 
 const Details = ({ configs, location }) => {
@@ -14,15 +13,10 @@ const Details = ({ configs, location }) => {
     return (await getMovie(id))?.data || null;
   }, [id]);
 
-  return (
-    <>
-      <Header />
-      {loading ? (
-        <LoadingIndicator isFullScrean />
-      ) : (
-        <DetailsContent movie={movie} error={error} configs={configs} />
-      )}
-    </>
+  return loading ? (
+    <LoadingIndicator isFullScrean />
+  ) : (
+    <DetailsContent movie={movie} error={error} configs={configs} />
   );
 };
 

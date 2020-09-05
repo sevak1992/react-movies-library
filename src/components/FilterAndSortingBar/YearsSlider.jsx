@@ -63,4 +63,14 @@ YearsSlider.propTypes = {
   lastYear: PropTypes.number.isRequired,
 };
 
-export default YearsSlider;
+function areEqual(prev, next) {
+  return (
+    prev.firstYear === next.firstYear &&
+    prev.lastYear === next.lastYear &&
+    prev.updateRange === next.updateRange &&
+    prev.yearsRange[0] === next.yearsRange[0] &&
+    prev.yearsRange[1] === next.yearsRange[1]
+  );
+}
+
+export default React.memo(YearsSlider, areEqual);

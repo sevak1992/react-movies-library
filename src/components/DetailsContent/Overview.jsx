@@ -35,4 +35,4 @@ Overview.propTypes = {
   overview: PropTypes.string.isRequired,
 };
 
-export default Overview;
+export default React.memo(Overview);

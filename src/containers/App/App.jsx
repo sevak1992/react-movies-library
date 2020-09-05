@@ -15,6 +15,7 @@ import theme from "theme";
 import { PrivateRoute } from "routes/PrivateRoute";
 import routes from "routes";
 import { getConfigs } from "apis/tmdb";
+import Header from "containers/Header";
 
 const useStyles = makeStyles(() => ({
   pageWrap: {
@@ -41,6 +42,7 @@ function App() {
     <ThemeProvider theme={muiTheme}>
       <div className={classes.pageWrap}>
         <Router>
+          <Header />
           <Switch>
             {routes.map((route) => {
               const Component = route.component;

@@ -104,4 +104,4 @@ BasicInfo.defaultProps = {
   budget: 0,
 };
 
-export default BasicInfo;
+export default React.memo(BasicInfo);

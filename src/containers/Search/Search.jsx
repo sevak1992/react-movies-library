@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import { searchMovies } from "apis/tmdb";
 import LoadingIndicator from "components/common/LoadingIndicator";
-import Header from "containers/Header";
 import SearchContent from "components/SearchContent";
 
 const Search = ({ configs, location }) => {
@@ -43,22 +42,17 @@ const Search = ({ configs, location }) => {
     }
   };
 
-  return (
-    <>
-      <Header />
-      {loading ? (
-        <LoadingIndicator isFullScrean />
-      ) : (
-        <SearchContent
-          configs={configs}
-          loadMore={loadMore}
-          movies={movies}
-          error={error}
-          hasMore={hasMore}
-          query={query}
-        />
-      )}
-    </>
+  return loading ? (
+    <LoadingIndicator isFullScrean />
+  ) : (
+    <SearchContent
+      configs={configs}
+      loadMore={loadMore}
+      movies={movies}
+      error={error}
+      hasMore={hasMore}
+      query={query}
+    />
   );
 };
 
