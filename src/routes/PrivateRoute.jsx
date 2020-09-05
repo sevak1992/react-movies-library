@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Eclipse } from "react-loading-io";
+import LoadingIndicator from "components/common/LoadingIndicator";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const redirectionUrl = rest.location.pathname + rest.location.search;
@@ -24,10 +24,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   }, [currentUser, history, redirectionUrl]);
 
   return loading ? (
-    <center>
-      {" "}
-      <Eclipse />{" "}
-    </center>
+    <LoadingIndicator isFullScrean />
   ) : (
     <Route
       {...rest}

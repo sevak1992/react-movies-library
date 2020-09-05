@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import ReactSlider from "react-slick";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
+import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import { Eclipse } from "react-loading-io";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import LoadingIndicator from "components/common/LoadingIndicator";
 import ArrowBtn from "./ArrowBtn";
 import SliderItemWrapper from "./SliderItemWrapper";
 
@@ -84,6 +85,7 @@ const getSettings = (sliderSettings, itemsCount) => {
 function Slider({
   items,
   loading,
+  error,
   noItemsMessage,
   settings,
   nextArrow,
@@ -94,6 +96,13 @@ function Slider({
   settings.prevArrow = prevArrow;
 
   const getContent = () => {
+    if (error) {
+      return (
+        <Alert variant="outlined" severity="error">
+          {messages.ERRORS.SOMETHING_WENT_WRONG}
+        </Alert>
+      );
+    }
     if (items.length) {
       return (
         <ReactSlider
@@ -109,7 +118,7 @@ function Slider({
     return <span>{noItemsMessage}</span>;
   };
 
-  return loading ? <Eclipse size={64} /> : getContent();
+  return loading ? <LoadingIndicator /> : getContent();
 }
 
 Slider.propTypes = {
@@ -132,6 +141,7 @@ Slider.propTypes = {
     ),
   }),
   loading: PropTypes.bool,
+  error: PropTypes.object,
   noItemsMessage: PropTypes.string,
   nextArrow: PropTypes.node,
   prevArrow: PropTypes.node,
@@ -139,6 +149,7 @@ Slider.propTypes = {
 
 Slider.defaultProps = {
   loading: false,
+  error: null,
   noItemsMessage: messages.SLIDER.NO_ELEMENTS_TO_SHOW,
   settings: {
     infinite: true,

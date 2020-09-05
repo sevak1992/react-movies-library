@@ -10,7 +10,7 @@ import { getSimilarMoviesByMovie } from "apis/tmdb";
 import { messages } from "../../constants";
 
 function SimilarMoviesSlider({ movieId, configs, noItemsMessage }) {
-  const { value: movies, loading } = useAsync(async () => {
+  const { value: movies, loading, error } = useAsync(async () => {
     return (await getSimilarMoviesByMovie(movieId))?.data?.results || [];
   }, [movieId]);
 
@@ -22,6 +22,7 @@ function SimilarMoviesSlider({ movieId, configs, noItemsMessage }) {
         configs={configs}
         loading={loading}
         noItemsMessage={noItemsMessage}
+        error={error}
       />
     </Grid>
   );

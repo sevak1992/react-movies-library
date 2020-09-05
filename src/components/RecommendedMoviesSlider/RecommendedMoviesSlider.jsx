@@ -10,7 +10,7 @@ import { getRecommendedMoviesByMovie } from "apis/tmdb";
 import { messages } from "../../constants";
 
 function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
-  const { value: movies, loading } = useAsync(async () => {
+  const { value: movies, loading, error } = useAsync(async () => {
     return (await getRecommendedMoviesByMovie(movieId))?.data?.results || [];
   }, [movieId]);
 
@@ -21,6 +21,7 @@ function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
         movies={movies ?? []}
         configs={configs}
         loading={loading}
+        error={error}
         noItemsMessage={noItemsMessage}
       />
     </Grid>

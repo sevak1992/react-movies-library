@@ -11,7 +11,7 @@ import { getMovieCredits } from "apis/tmdb";
 import { messages } from "../../constants";
 
 function Cast({ movieId, baseUrl, posterSizes }) {
-  const { value: cast, loading } = useAsync(async () => {
+  const { value: cast, loading, error } = useAsync(async () => {
     return (await getMovieCredits(movieId))?.data?.cast || [];
   }, [movieId]);
 
@@ -24,7 +24,7 @@ function Cast({ movieId, baseUrl, posterSizes }) {
           </Skeleton>
         );
       })
-    : cast.map((person) => {
+    : (cast || []).map((person) => {
         const { profile_path: profilePath } = person;
         const src = imageBaseUrl + profilePath;
         return <Avatar key={person.id} src={src} title={person.name} />;
@@ -33,7 +33,7 @@ function Cast({ movieId, baseUrl, posterSizes }) {
   return (
     <>
       <Heading text={messages.MOVIE.CAST} />
-      <Slider items={castItems} />
+      <Slider items={castItems} error={error} />
     </>
   );
 }

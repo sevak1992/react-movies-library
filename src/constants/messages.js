@@ -59,4 +59,7 @@ export default {
     FILTER_BTN: "Filter",
     RESET_FILTER_BTN: "Reset",
   },
+  ERRORS: {
+    SOMETHING_WENT_WRONG: "Oops, Something Went Wrong.",
+  },
 };

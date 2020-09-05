@@ -4,9 +4,9 @@ import InfiniteScroll from "react-infinite-scroller";
 
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 
+import LoadingIndicator from "components/common/LoadingIndicator";
 import MovieItem from "components/common/MovieItem";
 import Heading from "components/common/Heading";
 
@@ -45,7 +45,7 @@ function MoviesList({
           hasMore={hasMore}
           loader={
             <Box key={0} display="flex" justifyContent="center" mt={3}>
-              <CircularProgress />
+              <LoadingIndicator />
             </Box>
           }
         >

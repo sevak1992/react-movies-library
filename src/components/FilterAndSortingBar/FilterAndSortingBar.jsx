@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAsync } from "react-use";
 import { useSelector, useDispatch } from "react-redux";
+import Alert from "@material-ui/lab/Alert";
 
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
@@ -12,20 +13,19 @@ import {
   changeSorting,
   resetFilter,
 } from "actions";
+import LoadingIndicator from "components/common/LoadingIndicator";
 import { getGenres } from "apis/tmdb";
-import { config , messages } from "../../constants";
+import { config, messages } from "../../constants";
 import GenreFilter from "./GenreFilter";
 import YearsSlider from "./YearsSlider";
 import Sorting from "./Sorting";
-
-
 
 const LAST_YEAR = new Date().getFullYear();
 const FIRST_YEAR = LAST_YEAR - config.YEARS_NUM;
 
 function FilterAndSortingBar() {
   const dispatch = useDispatch();
-  const { value: genres, loading } = useAsync(
+  const { value: genres, loading, error: genresError } = useAsync(
     async () => (await getGenres())?.data?.genres || []
   );
 
@@ -59,7 +59,13 @@ function FilterAndSortingBar() {
     <Box>
       <Paper elevation={3}>
         <Sorting selectedSorting={sorting} onChange={onChangeSorting} />
-        {!loading && (
+        {loading ? (
+          <LoadingIndicator />
+        ) : genresError ? (
+          <Alert variant="outlined" severity="error">
+            {messages.ERRORS.SOMETHING_WENT_WRONG}
+          </Alert>
+        ) : (
           <GenreFilter
             genres={genres}
             checkedGenres={checkedGenres}

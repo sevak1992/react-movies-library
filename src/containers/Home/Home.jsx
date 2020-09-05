@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Box";
+import Alert from "@material-ui/lab/Alert";
 import { useSelector } from "react-redux";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
 
+import LoadingIndicator from "components/common/LoadingIndicator";
 import MoviesList from "components/MoviesList";
 import Header from "containers/Header";
 import FilterAndSortingBar from "components/FilterAndSortingBar";
 import { getMovies } from "apis/tmdb";
+
+import { messages } from "../../constants";
 
 const useStyles = makeStyles(() => ({
   homeContent: {
@@ -18,6 +22,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Home({ configs }) {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const filter = useSelector((state) => state.filter);
@@ -31,8 +37,10 @@ function Home({ configs }) {
           setHasMore(false);
         }
         setMovies([...res.data.results]);
-      } catch (error) {
-        // TODO: handle error
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
       }
     };
     fetchMovies();
@@ -45,39 +53,63 @@ function Home({ configs }) {
         setHasMore(false);
       }
       setMovies((m) => [...m.concat(res.data.results)]);
-    } catch (error) {
-      // TODO: handle error
+    } catch (err) {
+      setHasMore(false);
     }
   };
 
   const classes = useStyles();
   const matches960 = useMediaQuery("(min-width: 960px)");
+  const getContent = () => {
+    if (movies.length) {
+      return (
+        <Grid
+          container
+          m={6}
+          ml={2}
+          flexDirection="row"
+          display="flex"
+          className={classes.homeContent}
+        >
+          {matches960 && (
+            <Grid item pr={3} spacing={3}>
+              <FilterAndSortingBar />
+            </Grid>
+          )}
+          <Grid item xs={6} spacing={3}>
+            <MoviesList
+              movies={movies}
+              hasMore={hasMore}
+              loadMore={loadMore}
+              configs={configs}
+            />
+          </Grid>
+        </Grid>
+      );
+    }
+    if (error) {
+      return (
+        <Grid
+          container
+          m={6}
+          ml={2}
+          flexDirection="row"
+          display="flex"
+          className={classes.homeContent}
+        >
+          <Alert variant="outlined" severity="error">
+            {messages.ERRORS.SOMETHING_WENT_WRONG}
+          </Alert>
+        </Grid>
+      );
+    }
+    return "";
+  };
 
   return (
     <>
       <Header />
-      <Grid
-        container
-        m={6}
-        ml={2}
-        flexDirection="row"
-        display="flex"
-        className={classes.homeContent}
-      >
-        {matches960 && (
-          <Grid item pr={3} spacing={3}>
-            <FilterAndSortingBar />
-          </Grid>
-        )}
-        <Grid item xs={6} spacing={3}>
-          <MoviesList
-            movies={movies}
-            hasMore={hasMore}
-            loadMore={loadMore}
-            configs={configs}
-          />
-        </Grid>
-      </Grid>
+      {loading ? <LoadingIndicator isFullScrean /> : getContent()}
     </>
   );
 }

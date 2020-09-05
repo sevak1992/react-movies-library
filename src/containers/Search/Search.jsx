@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Alert from "@material-ui/lab/Alert";
 
 import { searchMovies } from "apis/tmdb";
+import LoadingIndicator from "components/common/LoadingIndicator";
 import Header from "containers/Header";
 import MoviesList from "components/MoviesList";
 import MainContent from "components/common/MainContent";
@@ -12,6 +14,8 @@ import { messages } from "../../constants";
 const Search = ({ configs, location }) => {
   const query = location.pathname.split("/")[2];
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
@@ -23,8 +27,10 @@ const Search = ({ configs, location }) => {
           setHasMore(false);
         }
         setMovies([...res.data.results]);
-      } catch (error) {
-        // TODO: handle error
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
       }
     };
     fetchMovies();
@@ -37,17 +43,15 @@ const Search = ({ configs, location }) => {
         setHasMore(false);
       }
       setMovies((m) => [...m.concat(res.data.results)]);
-    } catch (error) {
-      // TODO: handle error
+    } catch (err) {
+      setHasMore(false);
     }
   };
-  // TODO: handle loading
 
-  return (
-    <>
-      <Header />
-      <MainContent>
-        {movies.length > 0 ? (
+  const getContent = () => {
+    if (movies.length) {
+      return (
+        <MainContent>
           <MoviesList
             movies={movies}
             hasMore={hasMore}
@@ -57,10 +61,27 @@ const Search = ({ configs, location }) => {
             md={4}
             sm={6}
           />
-        ) : (
-          <Heading text={`${messages.SEARCH.NO_MOVIES_FOUND_BY} "${query}"`} />
-        )}
-      </MainContent>
+        </MainContent>
+      );
+    }
+    if (error) {
+      return (
+        <MainContent>
+          <Alert variant="outlined" severity="error">
+            {messages.ERRORS.SOMETHING_WENT_WRONG}
+          </Alert>
+        </MainContent>
+      );
+    }
+    return (
+      <Heading text={`${messages.SEARCH.NO_MOVIES_FOUND_BY} "${query}"`} />
+    );
+  };
+
+  return (
+    <>
+      <Header />
+      {loading ? <LoadingIndicator isFullScrean /> : getContent()}
     </>
   );
 };
