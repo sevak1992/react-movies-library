@@ -6,12 +6,19 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
-import { addGenresFilter, addYearFilter, changeSorting } from "actions";
+import {
+  addGenresFilter,
+  addYearFilter,
+  changeSorting,
+  resetFilter,
+} from "actions";
 import { getGenres } from "apis/tmdb";
-import { config } from "../../constants";
+import { config , messages } from "../../constants";
 import GenreFilter from "./GenreFilter";
 import YearsSlider from "./YearsSlider";
 import Sorting from "./Sorting";
+
+
 
 const LAST_YEAR = new Date().getFullYear();
 const FIRST_YEAR = LAST_YEAR - config.YEARS_NUM;
@@ -40,6 +47,10 @@ function FilterAndSortingBar() {
     dispatch(addGenresFilter(checkedGenres));
   };
 
+  const onResetFilter = () => {
+    dispatch(resetFilter());
+  };
+
   const onChangeSorting = (event) => {
     dispatch(changeSorting(event.target.value));
   };
@@ -64,7 +75,13 @@ function FilterAndSortingBar() {
 
         <Box pb={2} display="flex" justifyContent="center">
           <Button variant="outlined" color="primary" onClick={onFilter}>
-            Filter
+            {messages.FILTERS_AND_SORTING.FILTER_BTN}
+          </Button>
+        </Box>
+
+        <Box pb={2} display="flex" justifyContent="center">
+          <Button variant="outlined" color="secondary" onClick={onResetFilter}>
+            {messages.FILTERS_AND_SORTING.RESET_FILTER_BTN}
           </Button>
         </Box>
       </Paper>

@@ -22,7 +22,7 @@ function Home({ configs }) {
   const [hasMore, setHasMore] = useState(true);
   const filter = useSelector((state) => state.filter);
   const { sorting } = useSelector((state) => state.sorting);
-  console.log("filters", filter);
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {

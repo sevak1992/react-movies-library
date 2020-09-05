@@ -23,7 +23,8 @@ const filter = (state = initialState, action) => {
       };
     case RESET_FILTER_ACTION:
       return {
-        ...initialState,
+        genres: [],
+        yearsRange: null,
       };
     default:
       return state;

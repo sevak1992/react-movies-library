@@ -56,5 +56,7 @@ export default {
     GENRE: "Genre",
     SORT_BY: "Sort By",
     YEAR: "Year",
+    FILTER_BTN: "Filter",
+    RESET_FILTER_BTN: "Reset",
   },
 };
