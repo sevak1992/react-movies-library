@@ -1,25 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Grid from "@material-ui/core/Box";
-import Alert from "@material-ui/lab/Alert";
 import { useSelector } from "react-redux";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles } from "@material-ui/core/styles";
 
 import LoadingIndicator from "components/common/LoadingIndicator";
-import MoviesList from "components/MoviesList";
+import HomeContent from "components/HomeContent";
 import Header from "containers/Header";
-import FilterAndSortingBar from "components/FilterAndSortingBar";
 import { getMovies } from "apis/tmdb";
-
-import { messages } from "../../constants";
-
-const useStyles = makeStyles(() => ({
-  homeContent: {
-    maxWidth: "100rem",
-    margin: "7rem auto 2.5rem",
-  },
-}));
 
 function Home({ configs }) {
   const [loading, setLoading] = useState(true);
@@ -58,58 +44,20 @@ function Home({ configs }) {
     }
   };
 
-  const classes = useStyles();
-  const matches960 = useMediaQuery("(min-width: 960px)");
-  const getContent = () => {
-    if (movies.length) {
-      return (
-        <Grid
-          container
-          m={6}
-          ml={2}
-          flexDirection="row"
-          display="flex"
-          className={classes.homeContent}
-        >
-          {matches960 && (
-            <Grid item pr={3} spacing={3}>
-              <FilterAndSortingBar />
-            </Grid>
-          )}
-          <Grid item xs={6} spacing={3}>
-            <MoviesList
-              movies={movies}
-              hasMore={hasMore}
-              loadMore={loadMore}
-              configs={configs}
-            />
-          </Grid>
-        </Grid>
-      );
-    }
-    if (error) {
-      return (
-        <Grid
-          container
-          m={6}
-          ml={2}
-          flexDirection="row"
-          display="flex"
-          className={classes.homeContent}
-        >
-          <Alert variant="outlined" severity="error">
-            {messages.ERRORS.SOMETHING_WENT_WRONG}
-          </Alert>
-        </Grid>
-      );
-    }
-    return "";
-  };
-
   return (
     <>
       <Header />
-      {loading ? <LoadingIndicator isFullScrean /> : getContent()}
+      {loading ? (
+        <LoadingIndicator isFullScrean />
+      ) : (
+        <HomeContent
+          configs={configs}
+          loadMore={loadMore}
+          movies={movies}
+          error={error}
+          hasMore={hasMore}
+        />
+      )}
     </>
   );
 }

@@ -96,26 +96,22 @@ function Slider({
   settings.prevArrow = prevArrow;
 
   const getContent = () => {
-    if (error) {
-      return (
-        <Alert variant="outlined" severity="error">
-          {messages.ERRORS.SOMETHING_WENT_WRONG}
-        </Alert>
-      );
-    }
-    if (items.length) {
-      return (
-        <ReactSlider
-          {...getSettings(settings, items.length)}
-          className={classes.sliderContainer}
-        >
-          {items.map((item) => {
-            return <SliderItemWrapper key={item.key}>{item}</SliderItemWrapper>;
-          })}
-        </ReactSlider>
-      );
-    }
-    return <span>{noItemsMessage}</span>;
+    return error ? (
+      <Alert variant="outlined" severity="error">
+        {messages.ERRORS.SOMETHING_WENT_WRONG}
+      </Alert>
+    ) : items.length ? (
+      <ReactSlider
+        {...getSettings(settings, items.length)}
+        className={classes.sliderContainer}
+      >
+        {items.map((item) => {
+          return <SliderItemWrapper key={item.key}>{item}</SliderItemWrapper>;
+        })}
+      </ReactSlider>
+    ) : (
+      <span>{noItemsMessage}</span>
+    );
   };
 
   return loading ? <LoadingIndicator /> : getContent();

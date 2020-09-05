@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Alert from "@material-ui/lab/Alert";
 
 import { searchMovies } from "apis/tmdb";
 import LoadingIndicator from "components/common/LoadingIndicator";
 import Header from "containers/Header";
-import MoviesList from "components/MoviesList";
-import MainContent from "components/common/MainContent";
-import Heading from "components/common/Heading";
-
-import { messages } from "../../constants";
+import SearchContent from "components/SearchContent";
 
 const Search = ({ configs, location }) => {
   const query = location.pathname.split("/")[2];
@@ -48,40 +43,21 @@ const Search = ({ configs, location }) => {
     }
   };
 
-  const getContent = () => {
-    if (movies.length) {
-      return (
-        <MainContent>
-          <MoviesList
-            movies={movies}
-            hasMore={hasMore}
-            loadMore={loadMore}
-            configs={configs}
-            title={`${messages.SEARCH.SEARCH_BY} "${query}"`}
-            md={4}
-            sm={6}
-          />
-        </MainContent>
-      );
-    }
-    if (error) {
-      return (
-        <MainContent>
-          <Alert variant="outlined" severity="error">
-            {messages.ERRORS.SOMETHING_WENT_WRONG}
-          </Alert>
-        </MainContent>
-      );
-    }
-    return (
-      <Heading text={`${messages.SEARCH.NO_MOVIES_FOUND_BY} "${query}"`} />
-    );
-  };
-
   return (
     <>
       <Header />
-      {loading ? <LoadingIndicator isFullScrean /> : getContent()}
+      {loading ? (
+        <LoadingIndicator isFullScrean />
+      ) : (
+        <SearchContent
+          configs={configs}
+          loadMore={loadMore}
+          movies={movies}
+          error={error}
+          hasMore={hasMore}
+          query={query}
+        />
+      )}
     </>
   );
 };
