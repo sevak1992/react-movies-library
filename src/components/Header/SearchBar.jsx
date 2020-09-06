@@ -54,7 +54,7 @@ function SearchBar() {
   const onSearch = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (searchQuery.length === 0) {
+    if (!searchQuery.trim()) {
       return;
     }
     history.push(`/search/${searchQuery}`);

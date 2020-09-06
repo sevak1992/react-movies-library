@@ -12,7 +12,7 @@ import { config, messages } from "../../constants";
 
 const useStyles = makeStyles(() => ({
   formControl: {
-    width: 210,
+    width: 220,
   },
 }));
 

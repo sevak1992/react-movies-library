@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useToggle } from "react-use";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AppBar from "@material-ui/core/AppBar";
@@ -11,7 +12,7 @@ import Actions from "./Actions";
 import MobileMenu from "./MobileMenu";
 import LogoBox from "./LogoBox";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   grow: {
     flexGrow: 1,
   },
@@ -21,17 +22,12 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     justifyContent: "space-between",
   },
-  menuButton: {
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
 }));
 
 function Header() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [isDrawerOpen, toggleDrawer] = useToggle(false);
 
   const matches960 = useMediaQuery("(min-width: 960px)");
 
@@ -39,27 +35,21 @@ function Header() {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div className={classes.grow}>
       <AppBar className={classes.header}>
         {!matches960 && <LogoBox />}
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            onClick={handleDrawerOpen}
-            color="secondary"
-          >
-            <MenuIcon />
-          </IconButton>
+          {!matches960 && (
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              onClick={toggleDrawer}
+              color="secondary"
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           {matches960 && <LogoBox />}
           <Actions setMobileMoreAnchorEl={setMobileMoreAnchorEl} />
         </Toolbar>
@@ -68,7 +58,7 @@ function Header() {
         onClose={handleMobileMenuClose}
         mobileMoreAnchorEl={mobileMoreAnchorEl}
       />
-      <MobileDrawer open={open} onClose={handleDrawerClose} />
+      <MobileDrawer open={isDrawerOpen} onClose={toggleDrawer} />
     </div>
   );
 }

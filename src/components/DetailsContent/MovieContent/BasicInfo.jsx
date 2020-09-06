@@ -7,7 +7,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import EventIcon from "@material-ui/icons/Event";
 
-import { messages } from "../../constants";
+import { messages } from "../../../constants";
 
 const useStyles = makeStyles(() => ({
   basicInfoWrapper: {

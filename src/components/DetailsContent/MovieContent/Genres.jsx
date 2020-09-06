@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import Heading from "components/common/Heading";
 import { addGenresFilter, resetFilter } from "actions";
 
-import { messages } from "../../constants";
+import { messages } from "../../../constants";
 
 const useStyles = makeStyles(() => ({
   genreItem: {

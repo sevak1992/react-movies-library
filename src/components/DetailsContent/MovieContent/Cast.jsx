@@ -8,7 +8,7 @@ import Heading from "components/common/Heading";
 import Slider from "components/common/Slider";
 import { getMovieCredits } from "apis/tmdb";
 
-import { messages } from "../../constants";
+import { messages } from "../../../constants";
 
 function Cast({ movieId, baseUrl, posterSizes }) {
   const { value: cast, loading, error } = useAsync(async () => {

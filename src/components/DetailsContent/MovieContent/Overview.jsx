@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 import Heading from "components/common/Heading";
 
-import { messages } from "../../constants";
+import { messages } from "../../../constants";
 
 const useStyles = makeStyles(() => ({
   description: {

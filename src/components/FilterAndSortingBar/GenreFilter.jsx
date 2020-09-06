@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "flex-start",
     flexWrap: "wrap",
-    maxWidth: 210,
+    maxWidth: 220,
     "& > *": {
       margin: theme.spacing(0.5),
     },
