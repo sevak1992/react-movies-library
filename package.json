@@ -1,5 +1,6 @@
 {
   "name": "movies-library",
+  "homepage": "https://sevak1992.github.io/react-movies-library",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,7 +36,9 @@
     "build": "env-cmd -f .env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -61,6 +64,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
+    "gh-pages": "^3.1.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.13",
     "prettier": "^2.1.1"

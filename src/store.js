@@ -6,6 +6,8 @@ import reducers from "reducers";
 const enhancer =
   process.env.NODE_ENV !== "production" ? composeWithDevTools() : null;
 
-const store = createStore(reducers, enhancer);
+const store = enhancer
+  ? createStore(reducers, enhancer)
+  : createStore(reducers);
 
 export default store;
