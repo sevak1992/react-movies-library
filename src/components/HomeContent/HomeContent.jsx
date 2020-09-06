@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Box";
 import Alert from "@material-ui/lab/Alert";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
+import Heading from "components/common/Heading";
 
 import MoviesList from "components/MoviesList";
 import FilterAndSortingBar from "components/FilterAndSortingBar";
@@ -30,29 +31,31 @@ function HomeContent({ movies, error, hasMore, loadMore, configs }) {
       display="flex"
       className={classes.homeContent}
     >
-      {movies.length ? (
-        <>
-          {matches960 && (
-            <Grid item pr={3} spacing={3}>
-              <FilterAndSortingBar />
-            </Grid>
-          )}
-          <Grid item xs={6} spacing={3}>
-            <MoviesList
-              movies={movies}
-              hasMore={hasMore}
-              loadMore={loadMore}
-              configs={configs}
-            />
-          </Grid>
-        </>
-      ) : (
-        error && (
+      {matches960 && (
+        <Grid item pr={3} spacing={3}>
+          <FilterAndSortingBar />
+        </Grid>
+      )}
+      <Grid item xs={6} spacing={3}>
+        {movies.length ? (
+          <MoviesList
+            movies={movies}
+            hasMore={hasMore}
+            loadMore={loadMore}
+            configs={configs}
+          />
+        ) : error ? (
           <Alert variant="outlined" severity="error">
             {messages.ERRORS.SOMETHING_WENT_WRONG}
           </Alert>
-        )
-      )}
+        ) : (
+          <Heading
+            text={
+              messages.FILTERS_AND_SORTING.NO_MOVIES_FOUND_BY_PROVIDED_FILTERS
+            }
+          />
+        )}
+      </Grid>
     </Grid>
   );
 }

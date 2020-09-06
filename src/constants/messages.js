@@ -50,7 +50,7 @@ export default {
   },
   SEARCH: {
     SEARCH_BY: "Search By",
-    NO_MOVIES_FOUND_BY: "No movies found By",
+    NO_MOVIES_FOUND_BY: "No movies found by",
   },
   FILTERS_AND_SORTING: {
     GENRE: "Genre",
@@ -58,6 +58,7 @@ export default {
     YEAR: "Year",
     FILTER_BTN: "Filter",
     RESET_FILTER_BTN: "Reset",
+    NO_MOVIES_FOUND_BY_PROVIDED_FILTERS: "No movies found by provided filter",
   },
   ERRORS: {
     SOMETHING_WENT_WRONG: "Oops, Something Went Wrong.",
