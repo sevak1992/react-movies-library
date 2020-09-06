@@ -37,6 +37,10 @@ function MobileMenuComponent({ mobileMoreAnchorEl, onClose, firebase }) {
     history.push("log-in");
   };
 
+  const navigateToFavorites = () => {
+    history.push("favorites");
+  };
+
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
@@ -51,9 +55,11 @@ function MobileMenuComponent({ mobileMoreAnchorEl, onClose, firebase }) {
           <MenuItem>
             {authUser.user && (
               <>
-                <IconButton>
+                <IconButton onClick={navigateToFavorites}>
                   <Badge
-                    badgeContent={Object.keys(authUser?.favorites || {}).length}
+                    badgeContent={
+                      Object.keys(authUser?.user?.favorites || {}).length
+                    }
                     className={classes.favoritesBadge}
                   >
                     <FavoriteBorderIcon className={classes.favoritesIcon} />

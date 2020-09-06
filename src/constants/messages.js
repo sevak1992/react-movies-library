@@ -34,6 +34,10 @@ export default {
   MOBILE_DRAWER: {
     FILTERS_AND_SORTING: "Filters/Sorting",
   },
+  FAVORITES: {
+    TITLE: "Favorites",
+    YOU_HAVE_NO_FAVORTITE_MOVIES: "You've no favorite movies.",
+  },
   LOGIN: {
     LOGIN_TITLE: "Log in",
     LOGIN_BTN: "Log In",

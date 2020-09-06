@@ -50,6 +50,10 @@ function ActionsComponent({ setMobileMoreAnchorEl, firebase }) {
     history.push("log-in");
   };
 
+  const navigateToFavorites = () => {
+    history.push("favorites");
+  };
+
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
@@ -58,9 +62,11 @@ function ActionsComponent({ setMobileMoreAnchorEl, firebase }) {
           {matches960 ? (
             <div className={classes.flex}>
               {authUser.user && (
-                <IconButton>
+                <IconButton onClick={navigateToFavorites}>
                   <Badge
-                    badgeContent={Object.keys(authUser?.favorites || {}).length}
+                    badgeContent={
+                      Object.keys(authUser?.user?.favorites || {}).length
+                    }
                     className={classes.favoritesBadge}
                   >
                     <FavoriteBorderIcon className={classes.favoritesIcon} />
