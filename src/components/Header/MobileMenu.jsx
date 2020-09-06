@@ -6,7 +6,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import Typography from "@material-ui/core/Typography";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { compose } from "recompose";
 
@@ -16,12 +18,16 @@ import routes from "routes";
 
 import { messages } from "../../constants";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ palette }) => ({
   favoritesBadge: {
-    color: theme.palette.error.dark,
+    color: palette.error.dark,
   },
   favoritesIcon: {
-    color: theme.palette.error.dark,
+    color: palette.error.dark,
+  },
+  leftSpace: {
+    marginLeft: "1rem",
+    color: palette.secondary,
   },
 }));
 
@@ -53,9 +59,9 @@ function MobileMenuComponent({ mobileMoreAnchorEl, onClose, firebase }) {
           open={isMobileMenuOpen}
           onClose={onClose}
         >
-          <MenuItem>
-            {authUser.user && (
-              <>
+          {authUser.user && (
+            <>
+              <MenuItem>
                 <IconButton onClick={navigateToFavorites}>
                   <Badge
                     badgeContent={
@@ -65,21 +71,36 @@ function MobileMenuComponent({ mobileMoreAnchorEl, onClose, firebase }) {
                   >
                     <FavoriteBorderIcon className={classes.favoritesIcon} />
                   </Badge>
+                  <Typography className={classes.leftSpace} variant="subtitle1">
+                    {messages.HEADER.FAVORITES}
+                  </Typography>
                 </IconButton>
-                <p>{messages.HEADER.FAVORITES}</p>
-              </>
-            )}
-          </MenuItem>
-          <MenuItem>
-            <IconButton color="primary">
-              {authUser.user ? (
-                <ExitToAppIcon onClick={handleLogout} />
-              ) : (
-                <ExitToAppIcon onClick={handleLogIn} />
-              )}
-            </IconButton>
-            <p>{messages.HEADER.SIGN_OUT}</p>
-          </MenuItem>
+              </MenuItem>
+              <MenuItem>
+                <IconButton color="primary">
+                  <>
+                    <ExitToAppIcon onClick={handleLogout} />
+                    <Typography
+                      className={classes.leftSpace}
+                      variant="subtitle1"
+                    >
+                      {messages.HEADER.SIGN_OUT}
+                    </Typography>
+                  </>
+                </IconButton>
+              </MenuItem>
+            </>
+          )}
+          {!authUser.user && (
+            <MenuItem>
+              <IconButton color="primary">
+                <AccountCircleIcon onClick={handleLogIn} />
+                <Typography className={classes.leftSpace} variant="subtitle1">
+                  {messages.HEADER.LOGIN}
+                </Typography>
+              </IconButton>
+            </MenuItem>
+          )}
         </Menu>
       )}
     </AuthUserContext.Consumer>

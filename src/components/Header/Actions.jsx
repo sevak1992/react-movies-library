@@ -6,6 +6,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { compose } from "recompose";
@@ -78,7 +79,7 @@ function ActionsComponent({ setMobileMoreAnchorEl, firebase }) {
                 {authUser.user ? (
                   <ExitToAppIcon onClick={handleLogout} />
                 ) : (
-                  <ExitToAppIcon onClick={handleLogIn} />
+                  <AccountCircleIcon onClick={handleLogIn} />
                 )}
               </IconButton>
             </div>

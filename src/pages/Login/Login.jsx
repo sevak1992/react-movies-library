@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { compose } from "recompose";
 import Container from "@material-ui/core/Container";
@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
@@ -108,7 +107,7 @@ function LoginForm(props) {
         </Button>
         <Grid container>
           <Grid item>
-            <Link href={routes.signup.path} variant="body2">
+            <Link to={routes.signup.path} variant="body2">
               {messages.LOGIN.DO_NOT_HAVE_ACCOUNT}
             </Link>
           </Grid>

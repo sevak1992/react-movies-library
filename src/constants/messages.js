@@ -29,6 +29,7 @@ export default {
   HEADER: {
     FAVORITES: "Favorites",
     SIGN_OUT: "Sign Out",
+    LOGIN: "Login",
     SEARCH_PLACEHOLDER: "Search...",
   },
   MOBILE_DRAWER: {
@@ -39,8 +40,8 @@ export default {
     YOU_HAVE_NO_FAVORTITE_MOVIES: "You've no favorite movies.",
   },
   LOGIN: {
-    LOGIN_TITLE: "Log in",
-    LOGIN_BTN: "Log In",
+    LOGIN_TITLE: "Login",
+    LOGIN_BTN: "LogIn",
     EMAIL: "Email",
     PASSWORD: "Password",
     DO_NOT_HAVE_ACCOUNT: "Do not have an account? Sign Up",
