@@ -11,6 +11,8 @@ import {
   ThemeProvider,
   makeStyles,
 } from "@material-ui/core/styles";
+import VerticalAlignTopIcon from "@material-ui/icons/VerticalAlignTop";
+import ScrollToTop from "react-scroll-up";
 
 import theme from "theme";
 import { PrivateRoute } from "routes/PrivateRoute";
@@ -20,10 +22,19 @@ import Header from "components/Header";
 
 import { messages } from "./constants";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ palette }) => ({
   pageWrap: {
     minWidth: "320px",
     overflow: "hidden",
+  },
+  scrollToTopBtn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "2rem",
+    height: "2rem",
+    border: `1px solid ${palette.info.main}`,
+    borderRadius: "50%",
   },
 }));
 
@@ -79,6 +90,11 @@ function App() {
           </Switch>
           <Redirect from="*" to="/" />
         </Router>
+        <ScrollToTop showUnder={480}>
+          <div className={classes.scrollToTopBtn}>
+            <VerticalAlignTopIcon color="primary" />
+          </div>
+        </ScrollToTop>
       </div>
     </ThemeProvider>
   );
