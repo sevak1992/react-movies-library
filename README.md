@@ -1,4 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Movies Library
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+[The application published and available here](todo)
+
+The SPA built with Reach to search, filter and sort movies list, see the details, movie suggestions and add to favorites list when user is authorized. The application uses the [TMDB public API](https://developers.themoviedb.org/3/getting-started/introduction). The application includes the following features:
+
+- Login and Signup a user
+- See/search/filter and sort fetched movies list in MoviesList
+- Movie Details page with movie suggestions, genres suggestions, etc.
+- Favorites page for authorized users | users can add/remove the movie to/from favorites list
+- Guest users can see the MoviesList and Details pages | the only limitaion is Favorites page (only authorized users can see and use that functionality)
+
+**Note:** The application is responive and have adaptive UI, supports desktop/tablet/mobile devices.
+
+# Prerequisites
+
+- Node v12+ and yarn: v1.22.5 (or npm: v6.9.0)
+
+# Installing | building | running
+
+The steps if you need to run the application locally:
+
+```sh
+$ git clone https://github.com/sevak1992/react-movies-library.git
+$ cd react-movies-library
+$ yarn #or npm install
+$ npm start
+```
+
+After the running the **npm start** command please navigate to http://localhost:3000/ to see the hosted application.
+
+#### Required Environment variables:
+
+If you want to run or publish the application yourself you will need the additional steps. The following enviroment variables needed (See the [.env.example file](https://github.com/sevak1992/react-movies-library/blob/master/.env.example)):
+
+```sh
+REACT_APP_TMDB_API_KEY=
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_DATABASE_URL=
+REACT_APP_FIREBASE_MEASUREMENT_ID=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_APP_ID=
+```
+
+#### Available scripts
 
 ## Available Scripts
 
@@ -24,45 +71,58 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
-
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `npm lint`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The linter statically analyzes your code to quickly find problems.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Used technologies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [ReactJS](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Firebase](https://firebase.google.com/) - authentication and saving favorite movies in remote DB
+- [Material UI](https://v3.material-ui.com/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Code structure
 
-## Learn More
+    .
+    ├── ...
+    ├── actions                    # redux actions list
+    ├── apis                       # tmdb API
+    ├── assets                     # project assets here
+    ├── auth                       # Firebase auth and session logic
+    ├── components
+    │   ├── common
+    │   |   ├── ComomnComponent
+    │   |   |   ├── ComomnComponent.jsx
+    |   |   |   ├── index.js
+    │   |   ├── ...
+    │   ├── ExampleComponent
+    │   |   ├── ExampleComponent.jsx
+    │   |   ├── index.js
+    │   ├── ...
+    ├── constants
+    ├── pages
+    │   ├── Home
+    │   ├── Details
+    │   ├── ...
+    ├── reducers                     # redux reducers list
+    ├── routes                       # application private and public routes
+    ├── tmdbConfigs
+    ├── utils
+    ├── App.jsx
+    ├── index.js
+    ├── theme.js
+    ├── store.js
+    └── ...
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# UpComing Features or what to be done next!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Add new sections separate for TV shows, movies
+- Add new page for actors
+- Add new filters by actors, budget, etc..
 
-### Code Splitting
+## License
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+MIT
