@@ -48,7 +48,7 @@ function App() {
           <meta name="MobileOptimized" content="320" />
         </Helmet>
         <div className={classes.pageWrap}>
-          <Router>
+          <Router basename={process.env.PUBLIC_URL}>
             <Header />
             <Switch>
               {routes.map((route) => {
