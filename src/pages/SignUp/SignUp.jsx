@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { withFirebase } from "auth/firebase";
+import routes from "routes";
 
 import { messages } from "../../constants";
 
@@ -58,7 +59,7 @@ function SignUpForm(props) {
           email,
         });
       })
-      .then(() => history.push("/"))
+      .then(() => history.push(routes.home.path))
       .catch((err) => {
         setError(err);
       });
@@ -146,7 +147,7 @@ function SignUpForm(props) {
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
-            <Link href="log-in" variant="body2">
+            <Link to={routes.login.path} variant="body2">
               {messages.SIGN_UP.ALREADY_HAVE_AN_ACCOUNT}
             </Link>
           </Grid>

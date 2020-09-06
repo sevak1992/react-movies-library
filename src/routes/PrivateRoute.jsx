@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+
+import routes from "routes";
 import LoadingIndicator from "components/common/LoadingIndicator";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -14,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   useEffect(() => {
     const navigateToLogin = () => {
       history.push({
-        pathname: "/log-in",
+        pathname: routes.login.path,
         state: { url: redirectionUrl },
       });
     };

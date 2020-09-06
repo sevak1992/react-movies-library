@@ -17,7 +17,7 @@ import { compose } from "recompose";
 import { AuthUserContext } from "auth/session";
 
 import NoImageSvg from "assets/noImage.svg";
-
+import { basePath } from "routes";
 import { messages } from "../../../constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -106,7 +106,7 @@ function MovieItemComponent({ movie, baseUrl, posterSizes, firebase }) {
   };
 
   return (
-    <Link className={classes.link} to={`/movie/${movie.id}`}>
+    <Link className={classes.link} to={`${basePath}/movie/${movie.id}`}>
       <Card className={classes.movieItem}>
         <CardMedia
           image={imageUrl}

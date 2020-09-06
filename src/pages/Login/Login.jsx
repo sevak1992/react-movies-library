@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { withFirebase } from "auth/firebase";
+import routes from "routes";
 
 import { messages } from "../../constants";
 
@@ -49,7 +50,7 @@ function LoginForm(props) {
   const onSubmit = () => {
     props.firebase
       .doSignInWithEmailAndPassword(email, password)
-      .then(() => history.push("/"))
+      .then(() => history.push(routes.home.path))
       .catch((err) => {
         setError(err);
       });
@@ -107,7 +108,7 @@ function LoginForm(props) {
         </Button>
         <Grid container>
           <Grid item>
-            <Link href="sign-up" variant="body2">
+            <Link to={routes.signup.path} variant="body2">
               {messages.LOGIN.DO_NOT_HAVE_ACCOUNT}
             </Link>
           </Grid>

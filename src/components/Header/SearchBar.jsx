@@ -5,6 +5,7 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory } from "react-router-dom";
 
+import { basePath } from "routes";
 import { messages } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +58,7 @@ function SearchBar() {
     if (!searchQuery.trim()) {
       return;
     }
-    history.push(`/search/${searchQuery}`);
+    history.push(`${basePath}/search/${searchQuery}`);
   };
 
   const onKeyDown = (e) => {

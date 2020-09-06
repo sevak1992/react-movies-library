@@ -5,49 +5,54 @@ import Favorites from "pages/Favorites";
 import Details from "pages/Details";
 import Search from "pages/Search";
 
-const routes = [
-  {
+const basePath =
+  process.env.NODE_ENV !== "production" ? "" : process.env.PUBLIC_URL;
+
+const routes = {
+  home: {
     id: 1,
-    path: "/",
+    path: `${basePath}/`,
     exact: true,
     private: false,
     component: Home,
   },
-  {
+  details: {
     id: 2,
-    path: "/movie/:id",
+    path: `${basePath}/movie/:id`,
     exact: true,
     private: false,
     component: Details,
   },
-  {
+  login: {
     id: 3,
-    path: "/log-in",
+    path: `${basePath}/log-in`,
     exact: true,
     private: false,
     component: Login,
   },
-  {
+  signup: {
     id: 4,
-    path: "/sign-up",
+    path: `${basePath}/sign-up`,
     exact: true,
     private: false,
     component: SignUp,
   },
-  {
+  favorites: {
     id: 5,
-    path: "/favorites",
+    path: `${basePath}/favorites`,
     exact: true,
     private: true,
     component: Favorites,
   },
-  {
+  search: {
     id: 6,
-    path: "/search/:query",
+    path: `${basePath}/search/:query`,
     exact: true,
     private: false,
     component: Search,
   },
-];
+};
+
+export { basePath };
 
 export default routes;

@@ -6,7 +6,8 @@ import LoadingIndicator from "components/common/LoadingIndicator";
 import SearchContent from "components/SearchContent";
 
 const Search = ({ location }) => {
-  const query = location.pathname.split("/")[2];
+  const pathArr = location.pathname.split("/");
+  const query = pathArr.slice(-1).pop();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

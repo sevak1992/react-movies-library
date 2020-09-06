@@ -7,7 +7,8 @@ import LoadingIndicator from "components/common/LoadingIndicator";
 import DetailsContent from "components/DetailsContent";
 
 const Details = ({ location }) => {
-  const id = location.pathname.split("/")[2];
+  const pathArr = location.pathname.split("/");
+  const id = pathArr.slice(-1).pop();
 
   const { value: movie, loading, error } = useAsync(async () => {
     return (await getMovie(id))?.data || null;

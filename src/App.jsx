@@ -48,10 +48,10 @@ function App() {
           <meta name="MobileOptimized" content="320" />
         </Helmet>
         <div className={classes.pageWrap}>
-          <Router basename={process.env.PUBLIC_URL}>
+          <Router>
             <Header />
             <Switch>
-              {routes.map((route) => {
+              {Object.values(routes).map((route) => {
                 const Component = route.component;
                 return route.private ? (
                   <PrivateRoute

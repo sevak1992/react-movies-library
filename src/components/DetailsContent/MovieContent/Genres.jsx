@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 
 import Heading from "components/common/Heading";
 import { addGenresFilter, resetFilter } from "actions";
+import routes from "routes";
 
 import { messages } from "../../../constants";
 
@@ -25,7 +26,7 @@ function Genres({ genres }) {
   const onFilterByGenre = (id) => {
     dispatch(resetFilter());
     dispatch(addGenresFilter([id]));
-    history.push("/");
+    history.push(routes.home.path);
   };
 
   return (

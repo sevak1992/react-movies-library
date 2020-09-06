@@ -12,6 +12,7 @@ import { compose } from "recompose";
 
 import { AuthUserContext } from "auth/session";
 import { withFirebase } from "auth/firebase";
+import routes from "routes";
 
 import SearchBar from "./SearchBar";
 
@@ -47,11 +48,11 @@ function ActionsComponent({ setMobileMoreAnchorEl, firebase }) {
   };
 
   const handleLogIn = () => {
-    history.push("log-in");
+    history.push(routes.login.path);
   };
 
   const navigateToFavorites = () => {
-    history.push("favorites");
+    history.push(routes.favorites.path);
   };
 
   return (
