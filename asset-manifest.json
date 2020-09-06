@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/react-movies-library/static/css/main.34de6062.chunk.css",
-    "main.js": "/react-movies-library/static/js/main.76d091c3.chunk.js",
-    "main.js.map": "/react-movies-library/static/js/main.76d091c3.chunk.js.map",
+    "main.js": "/react-movies-library/static/js/main.4ab8667c.chunk.js",
+    "main.js.map": "/react-movies-library/static/js/main.4ab8667c.chunk.js.map",
     "runtime-main.js": "/react-movies-library/static/js/runtime-main.0185763e.js",
     "runtime-main.js.map": "/react-movies-library/static/js/runtime-main.0185763e.js.map",
     "static/css/2.e1e59016.chunk.css": "/react-movies-library/static/css/2.e1e59016.chunk.css",
-    "static/js/2.355a9608.chunk.js": "/react-movies-library/static/js/2.355a9608.chunk.js",
-    "static/js/2.355a9608.chunk.js.map": "/react-movies-library/static/js/2.355a9608.chunk.js.map",
+    "static/js/2.0ae48367.chunk.js": "/react-movies-library/static/js/2.0ae48367.chunk.js",
+    "static/js/2.0ae48367.chunk.js.map": "/react-movies-library/static/js/2.0ae48367.chunk.js.map",
     "index.html": "/react-movies-library/index.html",
-    "precache-manifest.a223b3ebc4789ad5e844623e9401891f.js": "/react-movies-library/precache-manifest.a223b3ebc4789ad5e844623e9401891f.js",
+    "precache-manifest.45f73e16b626392e5d4eba26c71cc165.js": "/react-movies-library/precache-manifest.45f73e16b626392e5d4eba26c71cc165.js",
     "service-worker.js": "/react-movies-library/service-worker.js",
     "static/css/2.e1e59016.chunk.css.map": "/react-movies-library/static/css/2.e1e59016.chunk.css.map",
     "static/css/main.34de6062.chunk.css.map": "/react-movies-library/static/css/main.34de6062.chunk.css.map",
-    "static/js/2.355a9608.chunk.js.LICENSE.txt": "/react-movies-library/static/js/2.355a9608.chunk.js.LICENSE.txt",
+    "static/js/2.0ae48367.chunk.js.LICENSE.txt": "/react-movies-library/static/js/2.0ae48367.chunk.js.LICENSE.txt",
     "static/media/noImage.svg": "/react-movies-library/static/media/noImage.7ebd0560.svg",
     "static/media/slick-theme.css": "/react-movies-library/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0185763e.js",
     "static/css/2.e1e59016.chunk.css",
-    "static/js/2.355a9608.chunk.js",
+    "static/js/2.0ae48367.chunk.js",
     "static/css/main.34de6062.chunk.css",
-    "static/js/main.76d091c3.chunk.js"
+    "static/js/main.4ab8667c.chunk.js"
   ]
 }
