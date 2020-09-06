@@ -21,7 +21,7 @@ import { messages } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(16),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -108,7 +108,7 @@ function LoginForm(props) {
         </Button>
         <Grid container>
           <Grid item>
-            <Link to={routes.signup.path} variant="body2">
+            <Link href={routes.signup.path} variant="body2">
               {messages.LOGIN.DO_NOT_HAVE_ACCOUNT}
             </Link>
           </Grid>

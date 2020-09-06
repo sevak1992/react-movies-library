@@ -21,7 +21,7 @@ import { messages } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(16),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -147,7 +147,7 @@ function SignUpForm(props) {
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
-            <Link to={routes.login.path} variant="body2">
+            <Link href={routes.login.path} variant="body2">
               {messages.SIGN_UP.ALREADY_HAVE_AN_ACCOUNT}
             </Link>
           </Grid>
