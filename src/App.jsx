@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import {
   createMuiTheme,
   ThemeProvider,
@@ -16,6 +17,8 @@ import { PrivateRoute } from "routes/PrivateRoute";
 import routes from "routes";
 import { getConfigs } from "apis/tmdb";
 import Header from "components/Header";
+
+import { messages } from "./constants";
 
 const useStyles = makeStyles(() => ({
   pageWrap: {
@@ -40,6 +43,12 @@ function App() {
 
   return (
     <ThemeProvider theme={muiTheme}>
+      <Helmet>
+        <title>{messages.APP.TITLE}</title>
+        <meta name="description" content={messages.APP.DESCRIPTION} />
+        <meta name="keywords" content={messages.APP.KEYWORDS} />
+        <meta name="MobileOptimized" content="320" />
+      </Helmet>
       <div className={classes.pageWrap}>
         <Router>
           <Header />

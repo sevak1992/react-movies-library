@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
+import { Helmet } from "react-helmet";
 
 import MainContent from "components/common/MainContent";
 import RecommendedMoviesSlider from "components/RecommendedMoviesSlider";
@@ -16,6 +17,12 @@ const DetailsContent = ({ movie, configs, error }) => {
     <MainContent>
       {movie ? (
         <>
+          <Helmet>
+            <title>
+              {movie.title} - {messages.APP.TITLE}
+            </title>
+            <meta name="description" content={movie.overview} />
+          </Helmet>
           <Grid container justify="center" spacing={6}>
             <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
               <MovieBigImage

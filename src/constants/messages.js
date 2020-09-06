@@ -1,6 +1,8 @@
 export default {
   APP: {
     TITLE: "Movies Library",
+    DESCRIPTION: "Movies Library is a, database for movies.",
+    KEYWORDS: "Movies, Reviews, Actors, Actresses, Photos, User Ratings, Cast",
     SIGN_OUT_BTN: "Sign out",
     LOGIN_BTN: "Login",
   },
