@@ -2,6 +2,9 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Rating from "@material-ui/lab/Rating";
+import { compose } from "recompose";
+
+import { withConfigs } from "tmdbConfigs";
 
 import { isNotEmptyArray } from "utils";
 import Header from "./Header";
@@ -82,4 +85,4 @@ MovieContent.propTypes = {
   }).isRequired,
 };
 
-export default MovieContent;
+export default compose(withConfigs)(MovieContent);

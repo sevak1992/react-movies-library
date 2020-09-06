@@ -35,5 +35,6 @@ module.exports = {
     "react/prop-types": "off",
     "no-param-reassign": "off",
     "no-nested-ternary": "off",
+    "no-shadow": "off",
   },
 };

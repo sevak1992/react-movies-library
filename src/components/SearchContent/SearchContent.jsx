@@ -8,14 +8,7 @@ import Heading from "components/common/Heading";
 
 import { messages } from "../../constants";
 
-const SearchContent = ({
-  query,
-  movies,
-  error,
-  hasMore,
-  loadMore,
-  configs,
-}) => {
+const SearchContent = ({ query, movies, error, hasMore, loadMore }) => {
   return (
     <MainContent>
       {movies.length ? (
@@ -23,7 +16,6 @@ const SearchContent = ({
           movies={movies}
           hasMore={hasMore}
           loadMore={loadMore}
-          configs={configs}
           title={`${messages.SEARCH.SEARCH_BY} "${query}"`}
           md={4}
           sm={6}
@@ -40,7 +32,6 @@ const SearchContent = ({
 };
 
 SearchContent.propTypes = {
-  configs: PropTypes.object.isRequired,
   loadMore: PropTypes.func.isRequired,
   query: PropTypes.string.isRequired,
   movies: PropTypes.array,

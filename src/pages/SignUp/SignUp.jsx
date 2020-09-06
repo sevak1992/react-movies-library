@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { compose } from "recompose";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Alert from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  Grid,
-  Link,
-  Container,
-  Typography,
-} from "@material-ui/core";
 
 import { withFirebase } from "auth/firebase";
 
@@ -43,6 +42,7 @@ function SignUpForm(props) {
   const classes = useStyles();
   const history = useHistory();
 
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -52,7 +52,6 @@ function SignUpForm(props) {
     props.firebase
       .doCreateUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        // Create a user in your Firebase realtime database
         return props.firebase.user(authUser.user.uid).set({
           firstName,
           lastName,
@@ -60,13 +59,18 @@ function SignUpForm(props) {
         });
       })
       .then(() => history.push("/"))
-      .catch(() => {
-        // TODO
+      .catch((err) => {
+        setError(err);
       });
   };
 
   return (
     <Container component="main" maxWidth="xs">
+      {error && (
+        <Alert variant="outlined" severity="error">
+          {messages.ERRORS.SOMETHING_WENT_WRONG}
+        </Alert>
+      )}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

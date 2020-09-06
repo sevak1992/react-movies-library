@@ -1,6 +1,5 @@
 import Home from "pages/Home";
 import Login from "pages/Login";
-import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
 import Favorites from "pages/Favorites";
 import Details from "pages/Details";
@@ -30,27 +29,20 @@ const routes = [
   },
   {
     id: 4,
-    path: "/sign-in",
-    exact: true,
-    private: false,
-    component: SignIn,
-  },
-  {
-    id: 5,
     path: "/sign-up",
     exact: true,
     private: false,
     component: SignUp,
   },
   {
-    id: 6,
+    id: 5,
     path: "/favorites",
     exact: true,
     private: true,
     component: Favorites,
   },
   {
-    id: 7,
+    id: 6,
     path: "/search/:query",
     exact: true,
     private: false,

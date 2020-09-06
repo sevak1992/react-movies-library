@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,6 +8,10 @@ import Badge from "@material-ui/core/Badge";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { compose } from "recompose";
+
+import { AuthUserContext } from "auth/session";
+import { withFirebase } from "auth/firebase";
 
 import SearchBar from "./SearchBar";
 
@@ -28,42 +33,65 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Actions({ setMobileMoreAnchorEl }) {
+function ActionsComponent({ setMobileMoreAnchorEl, firebase }) {
   const classes = useStyles();
+  const history = useHistory();
   const matches960 = useMediaQuery("(min-width: 960px)");
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    firebase.doSignOut();
+  };
+
+  const handleLogIn = () => {
+    history.push("log-in");
+  };
+
   return (
-    <div className={classes.actionsWrapper}>
-      <SearchBar />
-      {matches960 ? (
-        <div className={classes.flex}>
-          <IconButton>
-            <Badge badgeContent={17} className={classes.favoritesBadge}>
-              <FavoriteBorderIcon className={classes.favoritesIcon} />
-            </Badge>
-          </IconButton>
-          <IconButton edge="end" color="primary">
-            <ExitToAppIcon />
-          </IconButton>
-        </div>
-      ) : (
-        <div>
-          <IconButton onClick={handleMobileMenuOpen}>
-            <MoreIcon color="secondary" className={classes.moreIcon} />
-          </IconButton>
+    <AuthUserContext.Consumer>
+      {(authUser) => (
+        <div className={classes.actionsWrapper}>
+          <SearchBar />
+          {matches960 ? (
+            <div className={classes.flex}>
+              {authUser.user && (
+                <IconButton>
+                  <Badge
+                    badgeContent={Object.keys(authUser?.favorites || {}).length}
+                    className={classes.favoritesBadge}
+                  >
+                    <FavoriteBorderIcon className={classes.favoritesIcon} />
+                  </Badge>
+                </IconButton>
+              )}
+              <IconButton edge="end" color="primary">
+                {authUser.user ? (
+                  <ExitToAppIcon onClick={handleLogout} />
+                ) : (
+                  <ExitToAppIcon onClick={handleLogIn} />
+                )}
+              </IconButton>
+            </div>
+          ) : (
+            <div>
+              <IconButton onClick={handleMobileMenuOpen}>
+                <MoreIcon color="secondary" className={classes.moreIcon} />
+              </IconButton>
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </AuthUserContext.Consumer>
   );
 }
 
-Actions.propTypes = {
+ActionsComponent.propTypes = {
+  firebase: PropTypes.object.isRequired,
   setMobileMoreAnchorEl: PropTypes.func.isRequired,
 };
 
-// TODO: compare favorites count and user
-export default React.memo(Actions);
+const Actions = compose(withFirebase)(ActionsComponent);
+export default Actions;

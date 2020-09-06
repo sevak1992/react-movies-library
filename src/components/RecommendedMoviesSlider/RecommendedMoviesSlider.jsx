@@ -9,7 +9,7 @@ import { getRecommendedMoviesByMovie } from "apis/tmdb";
 
 import { messages } from "../../constants";
 
-function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
+function RecommendedMoviesSlider({ movieId, noItemsMessage }) {
   const { value: movies, loading, error } = useAsync(async () => {
     return (await getRecommendedMoviesByMovie(movieId))?.data?.results || [];
   }, [movieId]);
@@ -19,7 +19,6 @@ function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
       <Heading text={messages.MOVIE.RECOMMENDED_MOVIES} />
       <MoviesSlider
         movies={movies ?? []}
-        configs={configs}
         loading={loading}
         error={error}
         noItemsMessage={noItemsMessage}
@@ -29,12 +28,6 @@ function RecommendedMoviesSlider({ movieId, configs, noItemsMessage }) {
 }
 
 RecommendedMoviesSlider.propTypes = {
-  configs: PropTypes.shape({
-    images: PropTypes.shape({
-      base_url: PropTypes.string.isRequired,
-      poster_sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  }).isRequired,
   movieId: PropTypes.number.isRequired,
   noItemsMessage: PropTypes.string,
 };

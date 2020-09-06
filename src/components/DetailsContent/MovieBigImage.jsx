@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import { compose } from "recompose";
+
+import { withConfigs } from "tmdbConfigs";
 
 import NoImageSvg from "assets/noImage.svg";
 
@@ -44,4 +47,4 @@ MovieBigImage.propTypes = {
   }).isRequired,
 };
 
-export default React.memo(MovieBigImage);
+export default compose(withConfigs)(React.memo(MovieBigImage));

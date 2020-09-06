@@ -50,7 +50,7 @@ export const favorites = (uid) => db.ref(`favorites/${uid}`);
 
 export const favorite = () => db.ref("favorites");
 
-export const onAuthUserListener = (next, fallback) =>
+export const onAuthUserListener = (next) =>
   auth.onAuthStateChanged((authUser) => {
     if (authUser) {
       user(authUser.uid)
@@ -61,20 +61,24 @@ export const onAuthUserListener = (next, fallback) =>
             next({});
             return;
           }
-          authUser = {
-            uid: authUser.uid,
-            email: authUser.email,
-            emailVerified: authUser.emailVerified,
-            providerData: authUser.providerData,
-            ...dbUser,
-          };
+          favorites(authUser.uid).on("value", (snapshot) => {
+            const jobsObject = snapshot.val();
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              emailVerified: authUser.emailVerified,
+              providerData: authUser.providerData,
+              favorites: jobsObject || {},
+              ...dbUser,
+            };
 
-          next(authUser);
+            next(authUser);
+          });
         })
         .catch(() => {
           /* TODO: handle */
         });
     } else {
-      fallback();
+      next(null);
     }
   });

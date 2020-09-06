@@ -9,7 +9,7 @@ import { getSimilarMoviesByMovie } from "apis/tmdb";
 
 import { messages } from "../../constants";
 
-function SimilarMoviesSlider({ movieId, configs, noItemsMessage }) {
+function SimilarMoviesSlider({ movieId, noItemsMessage }) {
   const { value: movies, loading, error } = useAsync(async () => {
     return (await getSimilarMoviesByMovie(movieId))?.data?.results || [];
   }, [movieId]);
@@ -19,7 +19,6 @@ function SimilarMoviesSlider({ movieId, configs, noItemsMessage }) {
       <Heading text={messages.MOVIE.SIMILAR_MOVIES} />
       <MoviesSlider
         movies={movies ?? []}
-        configs={configs}
         loading={loading}
         noItemsMessage={noItemsMessage}
         error={error}
@@ -29,12 +28,6 @@ function SimilarMoviesSlider({ movieId, configs, noItemsMessage }) {
 }
 
 SimilarMoviesSlider.propTypes = {
-  configs: PropTypes.shape({
-    images: PropTypes.shape({
-      base_url: PropTypes.string.isRequired,
-      poster_sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  }).isRequired,
   movieId: PropTypes.number.isRequired,
   noItemsMessage: PropTypes.string,
 };

@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function HomeContent({ movies, error, hasMore, loadMore, configs }) {
+function HomeContent({ movies, error, hasMore, loadMore }) {
   const classes = useStyles();
   const matches960 = useMediaQuery("(min-width: 960px)");
 
@@ -38,12 +38,7 @@ function HomeContent({ movies, error, hasMore, loadMore, configs }) {
       )}
       <Grid item xs={6} spacing={3}>
         {movies.length ? (
-          <MoviesList
-            movies={movies}
-            hasMore={hasMore}
-            loadMore={loadMore}
-            configs={configs}
-          />
+          <MoviesList movies={movies} hasMore={hasMore} loadMore={loadMore} />
         ) : error ? (
           <Alert variant="outlined" severity="error">
             {messages.ERRORS.SOMETHING_WENT_WRONG}
@@ -61,7 +56,6 @@ function HomeContent({ movies, error, hasMore, loadMore, configs }) {
 }
 
 HomeContent.propTypes = {
-  configs: PropTypes.object.isRequired,
   loadMore: PropTypes.func.isRequired,
   movies: PropTypes.array,
   error: PropTypes.object,

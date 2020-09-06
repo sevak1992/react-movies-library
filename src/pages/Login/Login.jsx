@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { compose } from "recompose";
-import {
-  Container,
-  Typography,
-  Avatar,
-  Button,
-  CssBaseline,
-  Link,
-  Grid,
-  TextField,
-} from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Alert from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
+
 import { withFirebase } from "auth/firebase";
 
 import { messages } from "../../constants";
@@ -42,6 +42,7 @@ function LoginForm(props) {
   const classes = useStyles();
   const history = useHistory();
 
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -49,13 +50,18 @@ function LoginForm(props) {
     props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => history.push("/"))
-      .catch(() => {
-        /* TODO */
+      .catch((err) => {
+        setError(err);
       });
   };
 
   return (
     <Container component="main" maxWidth="xs">
+      {error && (
+        <Alert variant="outlined" severity="error">
+          {messages.ERRORS.SOMETHING_WENT_WRONG}
+        </Alert>
+      )}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

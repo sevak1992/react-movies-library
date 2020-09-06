@@ -5,7 +5,7 @@ import { searchMovies } from "apis/tmdb";
 import LoadingIndicator from "components/common/LoadingIndicator";
 import SearchContent from "components/SearchContent";
 
-const Search = ({ configs, location }) => {
+const Search = ({ location }) => {
   const query = location.pathname.split("/")[2];
 
   const [loading, setLoading] = useState(true);
@@ -46,7 +46,6 @@ const Search = ({ configs, location }) => {
     <LoadingIndicator isFullScrean />
   ) : (
     <SearchContent
-      configs={configs}
       loadMore={loadMore}
       movies={movies}
       error={error}
@@ -57,12 +56,6 @@ const Search = ({ configs, location }) => {
 };
 
 Search.propTypes = {
-  configs: PropTypes.shape({
-    images: PropTypes.shape({
-      base_url: PropTypes.string.isRequired,
-      poster_sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,

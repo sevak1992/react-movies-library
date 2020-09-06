@@ -3,6 +3,8 @@ import {
   ADD_YEAR_FILTER_ACTION,
   CHANGE_SORTING_ACTION,
   RESET_FILTER_ACTION,
+  USER_LOG_IN_ACTION,
+  USER_LOG_OUT_ACTION,
 } from "./types";
 
 export const addGenresFilter = (genres) => {
@@ -19,4 +21,11 @@ export const changeSorting = (sorting) => {
 
 export const resetFilter = () => {
   return { type: RESET_FILTER_ACTION };
+};
+export const logInAction = (value) => {
+  return { type: USER_LOG_IN_ACTION, data: value };
+};
+
+export const logOutAction = (value) => {
+  return { type: USER_LOG_OUT_ACTION, data: value };
 };

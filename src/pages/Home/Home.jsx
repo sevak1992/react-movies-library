@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 import LoadingIndicator from "components/common/LoadingIndicator";
 import HomeContent from "components/HomeContent";
 import { getMovies } from "apis/tmdb";
 
-function Home({ configs }) {
+function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
@@ -47,7 +46,6 @@ function Home({ configs }) {
     <LoadingIndicator isFullScrean />
   ) : (
     <HomeContent
-      configs={configs}
       loadMore={loadMore}
       movies={movies}
       error={error}
@@ -55,9 +53,5 @@ function Home({ configs }) {
     />
   );
 }
-
-Home.propTypes = {
-  configs: PropTypes.object.isRequired,
-};
 
 export default Home;

@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroller";
+import { compose } from "recompose";
+
+import { withConfigs } from "tmdbConfigs";
 
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -111,4 +114,4 @@ MoviesList.defaultProps = {
   title: "",
 };
 
-export default MoviesList;
+export default compose(withConfigs)(MoviesList);

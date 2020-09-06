@@ -5,9 +5,7 @@ import LoadingIndicator from "components/common/LoadingIndicator";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const redirectionUrl = rest.location.pathname + rest.location.search;
-  const [currentUser] = useState(
-    JSON.parse(localStorage.getItem("authUserInfo"))
-  );
+  const [currentUser] = useState(JSON.parse(localStorage.getItem("authUser")));
 
   const history = useHistory();
 

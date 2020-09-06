@@ -7,10 +7,14 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Rating from "@material-ui/lab/Rating";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { withFirebase } from "auth/firebase";
+import { compose } from "recompose";
+import { AuthUserContext } from "auth/session";
 
 import NoImageSvg from "assets/noImage.svg";
 
@@ -45,18 +49,62 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
   },
   favoritesIcon: {
+    cursor: "pointer",
     color: theme.palette.error.dark,
   },
 }));
 
-function MovieItem({ movie, baseUrl, posterSizes }) {
+function MovieItemComponent({ movie, baseUrl, posterSizes, firebase }) {
   const classes = useStyles();
+
   const { poster_path: posterPath } = movie;
   const imageUrl = posterPath
     ? `${baseUrl}${posterSizes[3]}${posterPath}`
     : NoImageSvg;
   const { vote_average: voteAverage } = movie;
   const rating = voteAverage / 2;
+
+  const handleFavoriteClick = (authUser, movieItem, addtoList) => {
+    if (addtoList) {
+      authUser.favorites[movieItem.id] = movieItem;
+    } else {
+      delete authUser.favorites[movieItem.id];
+    }
+    firebase
+      .favorite(authUser.uid)
+      .update({ [authUser.uid]: { ...authUser.favorites } });
+  };
+
+  const renderFavoriteIcon = (authUser, movieId) => {
+    if (!authUser) {
+      return null;
+    }
+    const state = Object.keys(authUser.favorites).includes(movieId.toString());
+    return (
+      <IconButton aria-label="add to favorites">
+        {state ? (
+          <FavoriteIcon
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              return handleFavoriteClick(authUser, movie, !state);
+            }}
+            className={classes.favoritesIcon}
+          />
+        ) : (
+          <FavoriteBorderIcon
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              return handleFavoriteClick(authUser, movie, !state);
+            }}
+            className={classes.favoritesIcon}
+          />
+        )}
+      </IconButton>
+    );
+  };
+
   return (
     <Link className={classes.link} to={`/movie/${movie.id}`}>
       <Card className={classes.movieItem}>
@@ -85,16 +133,16 @@ function MovieItem({ movie, baseUrl, posterSizes }) {
           />
         </CardContent>
         <CardActions className={classes.actions} disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteBorderIcon className={classes.favoritesIcon} />
-          </IconButton>
+          <AuthUserContext.Consumer>
+            {(authUser) => renderFavoriteIcon(authUser.user, movie.id)}
+          </AuthUserContext.Consumer>
         </CardActions>
       </Card>
     </Link>
   );
 }
 
-MovieItem.propTypes = {
+MovieItemComponent.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number,
     original_title: PropTypes.string,
@@ -107,4 +155,5 @@ MovieItem.propTypes = {
   posterSizes: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
+const MovieItem = compose(withFirebase)(MovieItemComponent);
 export default MovieItem;

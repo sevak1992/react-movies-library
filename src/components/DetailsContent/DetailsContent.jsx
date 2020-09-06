@@ -12,7 +12,7 @@ import MovieContent from "./MovieContent";
 
 import { messages } from "../../constants";
 
-const DetailsContent = ({ movie, configs, error }) => {
+const Details = ({ movie, error }) => {
   return (
     <MainContent>
       {movie ? (
@@ -25,25 +25,19 @@ const DetailsContent = ({ movie, configs, error }) => {
           </Helmet>
           <Grid container justify="center" spacing={6}>
             <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-              <MovieBigImage
-                title={movie.title}
-                src={movie.poster_path}
-                configs={configs}
-              />
+              <MovieBigImage title={movie.title} src={movie.poster_path} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
-              <MovieContent movie={movie} configs={configs} />
+              <MovieContent movie={movie} />
             </Grid>
           </Grid>
           <Grid container justify="flex-start" spacing={4}>
             <RecommendedMoviesSlider
               movieId={movie.id}
-              configs={configs}
               noItemsMessage={messages.DETAILS.NO_RECOMMENDED_MOVIES}
             />
             <SimilarMoviesSlider
               movieId={movie.id}
-              configs={configs}
               noItemsMessage={messages.DETAILS.NO_SIMILAR_MOVIES}
             />
           </Grid>
@@ -59,18 +53,12 @@ const DetailsContent = ({ movie, configs, error }) => {
   );
 };
 
-DetailsContent.propTypes = {
-  configs: PropTypes.shape({
-    images: PropTypes.shape({
-      base_url: PropTypes.string.isRequired,
-      poster_sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  }).isRequired,
+Details.propTypes = {
   error: PropTypes.object,
 };
 
-DetailsContent.defaultProps = {
+Details.defaultProps = {
   error: null,
 };
 
-export default DetailsContent;
+export default Details;

@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { compose } from "recompose";
+
+import { withConfigs } from "tmdbConfigs";
 
 import Slider from "components/common/Slider";
 import MovieItem from "components/common/MovieItem";
@@ -91,4 +94,4 @@ MoviesSlider.defaultProps = {
   error: null,
 };
 
-export default MoviesSlider;
+export default compose(withConfigs)(MoviesSlider);
