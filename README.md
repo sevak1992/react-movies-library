@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-[The application published and available here](todo)
+[The application published and available here](https://sevak1992.github.io/react-movies-library/)
 
 The SPA built with Reach to search, filter and sort movies list, see the details, movie suggestions and add to favorites list when user is authorized. The application uses the [TMDB public API](https://developers.themoviedb.org/3/getting-started/introduction). The application includes the following features:
 
