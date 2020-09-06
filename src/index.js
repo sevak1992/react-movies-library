@@ -6,7 +6,7 @@ import * as serviceWorker from "serviceWorker";
 import store from "store";
 import Firebase, { FirebaseContext } from "auth/firebase";
 import "./index.css";
-import App from "containers/App";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>

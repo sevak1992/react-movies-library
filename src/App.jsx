@@ -15,7 +15,7 @@ import theme from "theme";
 import { PrivateRoute } from "routes/PrivateRoute";
 import routes from "routes";
 import { getConfigs } from "apis/tmdb";
-import Header from "containers/Header";
+import Header from "components/Header";
 
 const useStyles = makeStyles(() => ({
   pageWrap: {

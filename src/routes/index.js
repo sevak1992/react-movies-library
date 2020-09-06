@@ -1,10 +1,10 @@
-import Home from "containers/Home";
-import Login from "containers/Login";
-import SignIn from "containers/SignIn";
-import SignUp from "containers/SignUp";
-import Favorites from "containers/Favorites";
-import Details from "containers/Details";
-import Search from "containers/Search";
+import Home from "pages/Home";
+import Login from "pages/Login";
+import SignIn from "pages/SignIn";
+import SignUp from "pages/SignUp";
+import Favorites from "pages/Favorites";
+import Details from "pages/Details";
+import Search from "pages/Search";
 
 const routes = [
   {
