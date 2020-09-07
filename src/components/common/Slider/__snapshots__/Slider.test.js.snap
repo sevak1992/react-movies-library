@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingIndicator compomnent renders correctly with empty items 1`] = `
+<span>
+  There is no elements to show.
+</span>
+`;
+
+exports[`Slider component renders correctly with empty items 1`] = `
+<span>
+  There is no elements to show.
+</span>
+`;

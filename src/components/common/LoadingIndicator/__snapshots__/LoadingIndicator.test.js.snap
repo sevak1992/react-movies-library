@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingIndicator compomnent renders correctly 1`] = `
+<div
+  className="MuiCircularProgress-root makeStyles-alignCenter-2 MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+  role="progressbar"
+  style={
+    Object {
+      "height": 40,
+      "width": 40,
+    }
+  }
+>
+  <svg
+    className="MuiCircularProgress-svg"
+    viewBox="22 22 44 44"
+  >
+    <circle
+      className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+      cx={44}
+      cy={44}
+      fill="none"
+      r={20.2}
+      strokeWidth={3.6}
+      style={Object {}}
+    />
+  </svg>
+</div>
+`;
+
+exports[`LoadingIndicator compomnent renders correctly with isFullScrean prop 1`] = `
+<div
+  className="makeStyles-fullScrean-1"
+>
+  <div
+    className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    role="progressbar"
+    style={
+      Object {
+        "height": 80,
+        "width": 80,
+      }
+    }
+  >
+    <svg
+      className="MuiCircularProgress-svg"
+      viewBox="22 22 44 44"
+    >
+      <circle
+        className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+        cx={44}
+        cy={44}
+        fill="none"
+        r={20.2}
+        strokeWidth={3.6}
+        style={Object {}}
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`LoadingIndicator component renders correctly 1`] = `
+<div
+  className="MuiCircularProgress-root makeStyles-alignCenter-2 MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+  role="progressbar"
+  style={
+    Object {
+      "height": 40,
+      "width": 40,
+    }
+  }
+>
+  <svg
+    className="MuiCircularProgress-svg"
+    viewBox="22 22 44 44"
+  >
+    <circle
+      className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+      cx={44}
+      cy={44}
+      fill="none"
+      r={20.2}
+      strokeWidth={3.6}
+      style={Object {}}
+    />
+  </svg>
+</div>
+`;
+
+exports[`LoadingIndicator component renders correctly with isFullScrean prop 1`] = `
+<div
+  className="makeStyles-fullScrean-1"
+>
+  <div
+    className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    role="progressbar"
+    style={
+      Object {
+        "height": 80,
+        "width": 80,
+      }
+    }
+  >
+    <svg
+      className="MuiCircularProgress-svg"
+      viewBox="22 22 44 44"
+    >
+      <circle
+        className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+        cx={44}
+        cy={44}
+        fill="none"
+        r={20.2}
+        strokeWidth={3.6}
+        style={Object {}}
+      />
+    </svg>
+  </div>
+</div>
+`;

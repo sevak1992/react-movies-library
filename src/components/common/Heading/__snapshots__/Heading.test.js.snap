@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Heading compomnent renders correctly 1`] = `
+<h4
+  className="MuiTypography-root makeStyles-heading-1 MuiTypography-h5 MuiTypography-colorTextPrimary"
+>
+  test 1
+</h4>
+`;
+
+exports[`Heading component renders correctly 1`] = `
+<h4
+  className="MuiTypography-root makeStyles-heading-1 MuiTypography-h5 MuiTypography-colorTextPrimary"
+>
+  test 1
+</h4>
+`;
