@@ -16,6 +16,9 @@ const useStyles = makeStyles(() => ({
     maxWidth: "100rem",
     margin: "7rem auto 2.5rem",
   },
+  flexGrow: {
+    flexGrow: 1,
+  },
 }));
 
 function HomeContent({ movies, error, hasMore, loadMore }) {
@@ -36,7 +39,7 @@ function HomeContent({ movies, error, hasMore, loadMore }) {
           <FilterAndSortingBar />
         </Grid>
       )}
-      <Grid item xs={6} spacing={3}>
+      <Grid item xs={6} spacing={3} className={classes.flexGrow}>
         {movies.length ? (
           <MoviesList movies={movies} hasMore={hasMore} loadMore={loadMore} />
         ) : error ? (
