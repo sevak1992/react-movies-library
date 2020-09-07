@@ -4,23 +4,23 @@
 
 [The application published and available here](https://sevak1992.github.io/react-movies-library/)
 
-The SPA built with Reach to search, filter and sort movies list, see the details, movie suggestions and add to favorites list when user is authorized. The application uses the [TMDB public API](https://developers.themoviedb.org/3/getting-started/introduction). The application includes the following features:
+The SPA built with Reach to search, filter and sort movie list, see the details, movie suggestions and add to favorites when user is authorized. The application uses the [TMDB public API](https://developers.themoviedb.org/3/getting-started/introduction). The application includes the following features:
 
-- Login and Signup a user
-- See/search/filter and sort fetched movies list in MoviesList
-- Movie Details page with movie suggestions, genres suggestions, etc.
+- User Login and Signup
+- Movie listing with search/filter/sort functionalities
+- Movie Details page with movie suggestions
 - Favorites page for authorized users | users can add/remove the movie to/from favorites list
-- Guest users can see the MoviesList and Details pages | the only limitaion is Favorites page (only authorized users can see and use that functionality)
+- Guest users can see the Movie Listing and Details pages | the only limitaion is Favorites page (only authorized users can see and use that functionality)
 
-**Note:** The application is responive and have adaptive UI, supports desktop/tablet/mobile devices.
+**Note:** The application is responive and has adaptive UI, supports desktop/tablet/mobile devices.
 
 # Prerequisites
 
-- Node v12+ and yarn: v1.22.5 (or npm: v6.9.0)
+- Node v12+ and yarn: v1.22.5+ (or npm: v6.9.0+)
 
 # Installing | building | running
 
-The steps if you need to run the application locally:
+The steps to run the application locally:
 
 ```sh
 $ git clone https://github.com/sevak1992/react-movies-library.git
@@ -29,11 +29,11 @@ $ yarn #or npm install
 $ npm start
 ```
 
-After the running the **npm start** command please navigate to http://localhost:3000/ to see the hosted application.
+After running the **npm start** command please navigate to http://localhost:3000/ to see the hosted application.
 
 #### Required Environment variables:
 
-If you want to run or publish the application yourself you will need the additional steps. The following enviroment variables needed (See the [.env.example file](https://github.com/sevak1992/react-movies-library/blob/master/.env.example)):
+Additional steps are needed if you want to run or publish the application yourself. The following enviroment variables are needed (See the [.env.example file](https://github.com/sevak1992/react-movies-library/blob/master/.env.example)):
 
 ```sh
 REACT_APP_TMDB_API_KEY=
@@ -44,8 +44,6 @@ REACT_APP_FIREBASE_MEASUREMENT_ID=
 REACT_APP_FIREBASE_PROJECT_ID=
 REACT_APP_FIREBASE_APP_ID=
 ```
-
-#### Available scripts
 
 ## Available Scripts
 
